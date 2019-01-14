@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3eb730d7-021b-41a5-9841-96209b4eaaf7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pawpaw/framework/config/PawpawFrameworkAutoConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/spring.factories" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pawpaw/framework/PawpawApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pawpaw/framework/PawpawApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/PawpawApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/PawpawApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/PawpawApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/dto/RemoteResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/dto/RemoteResult.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/dto/RemoteResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/dto/RemoteResultCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/dto/RemoteResultCode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/pawpaw/framework/dto/RemoteResultCode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pawpaw-framework-1.0-sources.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/pawpaw-framework-1.0-sources.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/pawpaw-framework-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/pawpaw-framework-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplicationTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,29 +16,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PawpawApplication.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pawpaw/framework/PawpawApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PawpawFrameworkAutoConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/pawpaw/framework/config/PawpawFrameworkAutoConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PawpawApplicationTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PawpawApplicationTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplicationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+            <state relative-caret-position="108">
+              <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SpringBootApplication.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.4.RELEASE/spring-boot-autoconfigure-2.0.4.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/SpringBootApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="598">
+              <caret line="54" column="18" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -59,18 +37,18 @@
       <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="911">
-              <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
+            <state relative-caret-position="442">
+              <caret line="44" column="7" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
             </state>
           </provider>
           <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
         </entry>
       </file>
-      <file leaf-file-name="spring.factories" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/spring.factories">
+      <file leaf-file-name="pawpaw-parent-1.0.0-SNAPSHOT.pom" pinned="false" current-in-tab="false">
+        <entry file="file://$MAVEN_REPOSITORY$/com/pawpaw/pawpaw-parent/1.0.0-SNAPSHOT/pawpaw-parent-1.0.0-SNAPSHOT.pom">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="-972">
+              <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -103,9 +81,17 @@
         <option value="$PROJECT_DIR$/src/test/java/framework/config/PawpawFrameworkAutoConfig.java" />
         <option value="$PROJECT_DIR$/src/test/java/framework/PawpawApplication.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplication.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplicationTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/pawpaw/framework/PawpawApplication.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplicationTest.java" />
       </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
     </option>
   </component>
   <component name="MavenRunner">
@@ -143,27 +129,6 @@
               <item name="pawpaw-framework" type="b2602c69:ProjectViewProjectNode" />
               <item name="pawpaw-framework" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pawpaw-framework" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pawpaw-framework" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pawpaw-framework" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pawpaw-framework" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pawpaw-framework" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pawpaw-framework" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -180,6 +145,10 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pawpaw-framework" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -300,6 +269,12 @@
     <history-entry file="PawpawApplicationTest - 2019.01.14 at 21h 25m 00s.xml">
       <configuration name="PawpawApplicationTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="PawpawApplicationTest - 2019.01.14 at 21h 25m 25s.xml">
+      <configuration name="PawpawApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PawpawApplicationTest - 2019.01.14 at 21h 29m 15s.xml">
+      <configuration name="PawpawApplicationTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -314,11 +289,11 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Version Control" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32978722" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32978722" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" />
@@ -351,14 +326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="911">
-          <caret line="36" column="7" selection-start-line="36" selection-start-column="7" selection-end-line="36" selection-end-column="7" />
-        </state>
-      </provider>
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/pawpaw/framework/config/PawpawFrameworkAutoConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -375,17 +342,39 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/framework/config/PawpawFrameworkAutoConfig.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplicationTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/pawpaw/framework/PawpawApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
+        <state relative-caret-position="351">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/pawpaw/framework/PawpawApplication.java">
+    <entry file="file://$MAVEN_REPOSITORY$/com/pawpaw/pawpaw-parent/1.0.0-SNAPSHOT/pawpaw-parent-1.0.0-SNAPSHOT.pom">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
+        <state relative-caret-position="-972">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="44" column="7" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
+        </state>
+      </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.4.RELEASE/spring-boot-autoconfigure-2.0.4.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/SpringBootApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="54" column="18" selection-start-line="54" selection-start-column="18" selection-end-line="54" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/pawpaw/framework/test/PawpawApplicationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
         </state>
       </provider>
     </entry>
