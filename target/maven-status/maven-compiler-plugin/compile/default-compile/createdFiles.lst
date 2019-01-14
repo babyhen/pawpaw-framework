@@ -1,3 +1,4 @@
+com\pawpaw\framework\config\PawpawFrameworkAutoConfig.class
 com\pawpaw\framework\dto\RemoteResultCode.class
 com\pawpaw\framework\PawpawApplication.class
 com\pawpaw\framework\dto\RemoteResult.class
