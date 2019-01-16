@@ -1,4 +1,4 @@
-package com.pawpaw.framework.config.web;
+package com.pawpaw.framework.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ public class ApplicationInfoController {
 
 
     @GetMapping("/statistic")
-    public void m(HttpServletRequest request, HttpServletResponse response){
+    public void statistic(HttpServletRequest request, HttpServletResponse response) {
         System.out.print(1);
     }
 

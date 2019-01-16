@@ -1,4 +1,5 @@
-package com.pawpaw.framework.dto;
+package com.pawpaw.framework.web;
+
 
 import com.pawpaw.common.enums.IEnumType;
 

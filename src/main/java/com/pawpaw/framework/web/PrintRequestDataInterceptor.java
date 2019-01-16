@@ -1,4 +1,4 @@
-package com.pawpaw.framework.config.web;
+package com.pawpaw.framework.web;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

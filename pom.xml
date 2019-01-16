@@ -26,11 +26,7 @@
 
 
     <dependencies>
-        <dependency>
-            <groupId>com.pawpaw</groupId>
-            <artifactId>common-component</artifactId>
-            <version>1.0</version>
-        </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

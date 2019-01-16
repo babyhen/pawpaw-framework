@@ -1,4 +1,4 @@
-package com.pawpaw.framework.dto;
+package com.pawpaw.framework.web;
 
 public class RemoteResult<T> {
     private RemoteResultCode code;
@@ -24,7 +24,9 @@ public class RemoteResult<T> {
         this.data = data;
     }
 
-
+    public boolean isSucc() {
+        return this.code == RemoteResultCode.SUCC;
+    }
     ////////////////////////////////////////////////////////////
 
 
