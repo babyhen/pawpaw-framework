@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class FtpUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(com.pawpaw.common.util.FtpUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(FtpUtil.class);
 
     public static void pullFile(String host, int port, List<String> remoteDirTree, final String remoteFileName,
                                 String userName, String password, OutputStream localFile) throws IOException {

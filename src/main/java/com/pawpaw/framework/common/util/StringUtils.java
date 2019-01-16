@@ -21,7 +21,7 @@ public class StringUtils {
             return new LinkedList<>();
         }
         String[] arr = org.springframework.util.StringUtils.split(s, sep);
-        return CollectionUtil.array2List(arr);
+        return CollectionConventer.array2List(arr);
     }
 
 

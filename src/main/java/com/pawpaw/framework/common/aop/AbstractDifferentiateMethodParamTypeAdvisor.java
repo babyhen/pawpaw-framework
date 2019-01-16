@@ -1,6 +1,6 @@
 package com.pawpaw.framework.common.aop;
 
-import com.pawpaw.common.util.AssertUtil;
+import com.pawpaw.framework.common.util.AssertUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.slf4j.Logger;
@@ -12,14 +12,14 @@ import java.util.Map;
 
 
 public abstract class AbstractDifferentiateMethodParamTypeAdvisor {
-    private static final Logger logger = LoggerFactory.getLogger(com.pawpaw.common.aop.AbstractDifferentiateMethodParamTypeAdvisor.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbstractDifferentiateMethodParamTypeAdvisor.class);
 
     public static Map<String, Class<?>> primaryTypeClassMap;
 
     private static Class<?> getPrimaryTypeClass(String name) {
         AssertUtil.notBlank(name, "����������Ϊ��");
         if (primaryTypeClassMap == null) {
-            synchronized (com.pawpaw.common.aop.AbstractDifferentiateMethodParamTypeAdvisor.class) {
+            synchronized (AbstractDifferentiateMethodParamTypeAdvisor.class) {
                 if (primaryTypeClassMap == null) {
                     Map<String, Class<?>> map = new HashMap<>();
                     map.put(Byte.TYPE.getName(), Byte.TYPE);

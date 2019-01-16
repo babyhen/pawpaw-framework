@@ -1,8 +1,6 @@
 package com.pawpaw.framework.exception;
 
-import com.pawpaw.common.exception.PawpawException;
-
-public class ErrorCodeException extends PawpawException {
+public class ErrorCodeException extends PawpawFrameworkException {
 
     private int code;
 

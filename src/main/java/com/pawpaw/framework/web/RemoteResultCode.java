@@ -1,7 +1,7 @@
 package com.pawpaw.framework.web;
 
 
-import com.pawpaw.common.enums.IEnumType;
+import com.pawpaw.framework.common.IEnumType;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

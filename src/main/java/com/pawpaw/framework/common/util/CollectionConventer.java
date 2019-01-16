@@ -7,7 +7,7 @@ import java.util.*;
 
 public class CollectionConventer {
 
-	public static final Logger logger = LoggerFactory.getLogger(com.pawpaw.common.util.CollectionConventer.class);
+	public static final Logger logger = LoggerFactory.getLogger(CollectionConventer.class);
 
 	public static int[] collection2IntArray(Collection<Integer> coll) {
 		if (coll == null) {

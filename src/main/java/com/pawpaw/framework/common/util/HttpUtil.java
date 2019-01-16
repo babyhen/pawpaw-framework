@@ -30,298 +30,298 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class HttpUtil {
-	private static final Logger logger = LoggerFactory.getLogger(com.pawpaw.common.util.HttpUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
-	/**
-	 * 设置超时时间
-	 */
-	private static HttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom()
-			.setConnectTimeout(5000).setConnectionRequestTimeout(5000).setSocketTimeout(5000).build()).build();
+    /**
+     * 设置超时时间
+     */
+    private static HttpClient client = HttpClientBuilder.create().setDefaultRequestConfig(RequestConfig.custom()
+            .setConnectTimeout(5000).setConnectionRequestTimeout(5000).setSocketTimeout(5000).build()).build();
 
-	public static final String DEFAULT_CHARSET = "UTF-8";
+    public static final String DEFAULT_CHARSET = "UTF-8";
 
-	///////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////
-	public static String postMultipartFormData(String url) {
-		return postMultipartFormData(url, null);
-	}
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+    public static String postMultipartFormData(String url) {
+        return postMultipartFormData(url, null);
+    }
 
-	public static String postMultipartFormData(String url, byte[] data) {
-		return postMultipartFormData(url, data, null);
-	}
+    public static String postMultipartFormData(String url, byte[] data) {
+        return postMultipartFormData(url, data, null);
+    }
 
-	public static String postMultipartFormData(String url, byte[] data, HttpCallBack callBack) {
-		logger.debug("http url is {}", url);
-		HttpPost post = new HttpPost(url);
-		ByteArrayEntity entity = new ByteArrayEntity(new byte[0]);
-		if (data != null) {
-			entity = new ByteArrayEntity(data, ContentType.MULTIPART_FORM_DATA);
-		}
-		post.setEntity(entity);
-		try {
-			if (callBack != null) {
-				callBack.beforeHttp(client, post, entity);
-			}
+    public static String postMultipartFormData(String url, byte[] data, HttpCallBack callBack) {
+        logger.debug("http url is {}", url);
+        HttpPost post = new HttpPost(url);
+        ByteArrayEntity entity = new ByteArrayEntity(new byte[0]);
+        if (data != null) {
+            entity = new ByteArrayEntity(data, ContentType.MULTIPART_FORM_DATA);
+        }
+        post.setEntity(entity);
+        try {
+            if (callBack != null) {
+                callBack.beforeHttp(client, post, entity);
+            }
 
-			HttpResponse response = client.execute(post);
-			String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-			logger.debug(resp);
-			if (callBack != null) {
-				callBack.afterHttp(client, response, resp);
-			}
-			int status = response.getStatusLine().getStatusCode();
-			logger.debug("http resp status is {}", status);
-			if (status != HttpStatus.SC_OK) {
-				logger.warn("http resp status is {}", status);
-				throw new RuntimeException("http请求status异常,status=" + status);
-			}
-			return resp;
-		} catch (Exception e) {
-			if (callBack != null) {
-				callBack.onException(post, e);
-			}
-			throw new RuntimeException(e);
-		} finally {
-			post.releaseConnection();
-		}
+            HttpResponse response = client.execute(post);
+            String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
+            logger.debug(resp);
+            if (callBack != null) {
+                callBack.afterHttp(client, response, resp);
+            }
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {}", status);
+            if (status != HttpStatus.SC_OK) {
+                logger.warn("http resp status is {}", status);
+                throw new RuntimeException("http请求status异常,status=" + status);
+            }
+            return resp;
+        } catch (Exception e) {
+            if (callBack != null) {
+                callBack.onException(post, e);
+            }
+            throw new RuntimeException(e);
+        } finally {
+            post.releaseConnection();
+        }
 
-	}
-	///////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////
+    }
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
 
-	public static String postFormData(String url) {
-		return postFormData(url, null);
-	}
+    public static String postFormData(String url) {
+        return postFormData(url, null);
+    }
 
-	public static String postFormData(String url, Map<String, String> data) {
-		return postFormData(url, data, null);
-	}
+    public static String postFormData(String url, Map<String, String> data) {
+        return postFormData(url, data, null);
+    }
 
-	/**
-	 * 发送post请求
-	 * 
-	 * @param url
-	 * @param data
-	 * @param callBack
-	 * @return
-	 * @throws Exception
-	 */
-	public static String postFormData(String url, Map<String, String> data, HttpCallBack callBack) {
-		logger.debug("http url is {}", url);
-		HttpPost post = new HttpPost(url);
+    /**
+     * 发送post请求
+     *
+     * @param url
+     * @param data
+     * @param callBack
+     * @return
+     * @throws Exception
+     */
+    public static String postFormData(String url, Map<String, String> data, HttpCallBack callBack) {
+        logger.debug("http url is {}", url);
+        HttpPost post = new HttpPost(url);
 
-		List<NameValuePair> pairs = new LinkedList<>();
-		if (data != null && data.size() > 0) {
-			for (Entry<String, String> e : data.entrySet()) {
-				String key = e.getKey();
-				String value = e.getValue();
-				pairs.add(new BasicNameValuePair(key, value));
-			}
+        List<NameValuePair> pairs = new LinkedList<>();
+        if (data != null && data.size() > 0) {
+            for (Entry<String, String> e : data.entrySet()) {
+                String key = e.getKey();
+                String value = e.getValue();
+                pairs.add(new BasicNameValuePair(key, value));
+            }
 
-		}
-		try {
-			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(pairs);
-			post.setEntity(entity);
-			if (callBack != null) {
-				callBack.beforeHttp(client, post, entity);
-			}
+        }
+        try {
+            UrlEncodedFormEntity entity = new UrlEncodedFormEntity(pairs);
+            post.setEntity(entity);
+            if (callBack != null) {
+                callBack.beforeHttp(client, post, entity);
+            }
 
-			HttpResponse response = client.execute(post);
-			String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-			logger.debug(resp);
-			if (callBack != null) {
-				callBack.afterHttp(client, response, resp);
-			}
-			int status = response.getStatusLine().getStatusCode();
-			logger.debug("http resp status is {}", status);
-			if (status != HttpStatus.SC_OK) {
-				logger.warn("http resp status is {}", status);
-				throw new RuntimeException("http请求status异常,status=" + status);
-			}
-			return resp;
-		} catch (Exception e) {
-			if (callBack != null) {
-				callBack.onException(post, e);
-			}
-			throw new RuntimeException(e);
-		} finally {
-			post.releaseConnection();
-		}
+            HttpResponse response = client.execute(post);
+            String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
+            logger.debug(resp);
+            if (callBack != null) {
+                callBack.afterHttp(client, response, resp);
+            }
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {}", status);
+            if (status != HttpStatus.SC_OK) {
+                logger.warn("http resp status is {}", status);
+                throw new RuntimeException("http请求status异常,status=" + status);
+            }
+            return resp;
+        } catch (Exception e) {
+            if (callBack != null) {
+                callBack.onException(post, e);
+            }
+            throw new RuntimeException(e);
+        } finally {
+            post.releaseConnection();
+        }
 
-	}
+    }
 
-	//////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
 
-	public static String postStringData(String url) {
-		return postStringData(url, null);
-	}
+    public static String postStringData(String url) {
+        return postStringData(url, null);
+    }
 
-	public static String postStringData(String url, String data) {
-		return postStringData(url, data, null);
-	}
+    public static String postStringData(String url, String data) {
+        return postStringData(url, data, null);
+    }
 
-	/**
-	 * 发送post请求
-	 * 
-	 * @param url
-	 * @param data
-	 * @param callBack
-	 * @return
-	 * @throws Exception
-	 */
-	public static String postStringData(String url, String data, HttpCallBack callBack) {
-		logger.debug("http url is {}", url);
-		HttpPost post = new HttpPost(url);
-		StringEntity se = new StringEntity(data, DEFAULT_CHARSET);
-		post.setEntity(se);
-		try {
-			if (callBack != null) {
-				callBack.beforeHttp(client, post, se);
-			}
+    /**
+     * 发送post请求
+     *
+     * @param url
+     * @param data
+     * @param callBack
+     * @return
+     * @throws Exception
+     */
+    public static String postStringData(String url, String data, HttpCallBack callBack) {
+        logger.debug("http url is {}", url);
+        HttpPost post = new HttpPost(url);
+        StringEntity se = new StringEntity(data, DEFAULT_CHARSET);
+        post.setEntity(se);
+        try {
+            if (callBack != null) {
+                callBack.beforeHttp(client, post, se);
+            }
 
-			HttpResponse response = client.execute(post);
-			String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-			logger.debug(resp);
-			if (callBack != null) {
-				callBack.afterHttp(client, response, resp);
-			}
-			int status = response.getStatusLine().getStatusCode();
-			logger.debug("http resp status is {}", status);
-			if (status != HttpStatus.SC_OK) {
-				logger.warn("http resp status is {}", status);
-				throw new RuntimeException("http请求status异常,status=" + status);
-			}
-			return resp;
-		} catch (Exception e) {
-			if (callBack != null) {
-				callBack.onException(post, e);
-			}
-			throw new RuntimeException(e);
-		} finally {
-			post.releaseConnection();
-		}
+            HttpResponse response = client.execute(post);
+            String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
+            logger.debug(resp);
+            if (callBack != null) {
+                callBack.afterHttp(client, response, resp);
+            }
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {}", status);
+            if (status != HttpStatus.SC_OK) {
+                logger.warn("http resp status is {}", status);
+                throw new RuntimeException("http请求status异常,status=" + status);
+            }
+            return resp;
+        } catch (Exception e) {
+            if (callBack != null) {
+                callBack.onException(post, e);
+            }
+            throw new RuntimeException(e);
+        } finally {
+            post.releaseConnection();
+        }
 
-	}
+    }
 
-	/////////////////////////////////////////////////////////////
-	public static String get(String url) {
-		return get(url, null, null);
-	}
+    /////////////////////////////////////////////////////////////
+    public static String get(String url) {
+        return get(url, null, null);
+    }
 
-	public static String get(String url, HttpCallBack callBack) {
-		return get(url, null, callBack);
-	}
+    public static String get(String url, HttpCallBack callBack) {
+        return get(url, null, callBack);
+    }
 
-	public static String get(String url, Map<String, String> params) {
-		return get(url, params, null);
-	}
+    public static String get(String url, Map<String, String> params) {
+        return get(url, params, null);
+    }
 
-	/**
-	 * 发送get请求
-	 * 
-	 * @param url
-	 * @param callBack
-	 * @return
-	 * @throws Exception
-	 */
-	public static String get(String url, Map<String, String> params, HttpCallBack callBack) {
-		logger.info("http url is {}", url);
-		if (params != null) {
-			List<NameValuePair> paramItem = new ArrayList<>();
-			for (Entry<String, String> entry : params.entrySet()) {
-				paramItem.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-			}
-			String paramStr = URLEncodedUtils.format(paramItem, DEFAULT_CHARSET);
-			if (!url.endsWith("?")) {
-				url += "?";
-			}
-			url += paramStr;
-			logger.info("processed http url is {}", url);
-		}
-		HttpGet get = new HttpGet(url);
-		try {
-			if (callBack != null) {
-				callBack.beforeHttp(client, get, null);
-			}
-			HttpResponse response = client.execute(get);
-			String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-			logger.info(resp);
-			if (callBack != null) {
-				callBack.afterHttp(client, response, resp);
-			}
-			int status = response.getStatusLine().getStatusCode();
-			logger.debug("http resp status is {}", status);
-			if (status != HttpStatus.SC_OK) {
-				logger.warn("http resp status is {}", status);
-				throw new RuntimeException("http请求status异常,status=" + status);
-			}
-			return resp;
-		} catch (Exception e) {
-			if (callBack != null) {
-				callBack.onException(get, e);
-			}
-			throw new RuntimeException(e);
-		} finally {
-			get.releaseConnection();
-		}
+    /**
+     * 发送get请求
+     *
+     * @param url
+     * @param callBack
+     * @return
+     * @throws Exception
+     */
+    public static String get(String url, Map<String, String> params, HttpCallBack callBack) {
+        logger.info("http url is {}", url);
+        if (params != null) {
+            List<NameValuePair> paramItem = new ArrayList<>();
+            for (Entry<String, String> entry : params.entrySet()) {
+                paramItem.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+            }
+            String paramStr = URLEncodedUtils.format(paramItem, DEFAULT_CHARSET);
+            if (!url.endsWith("?")) {
+                url += "?";
+            }
+            url += paramStr;
+            logger.info("processed http url is {}", url);
+        }
+        HttpGet get = new HttpGet(url);
+        try {
+            if (callBack != null) {
+                callBack.beforeHttp(client, get, null);
+            }
+            HttpResponse response = client.execute(get);
+            String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
+            logger.info(resp);
+            if (callBack != null) {
+                callBack.afterHttp(client, response, resp);
+            }
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {}", status);
+            if (status != HttpStatus.SC_OK) {
+                logger.warn("http resp status is {}", status);
+                throw new RuntimeException("http请求status异常,status=" + status);
+            }
+            return resp;
+        } catch (Exception e) {
+            if (callBack != null) {
+                callBack.onException(get, e);
+            }
+            throw new RuntimeException(e);
+        } finally {
+            get.releaseConnection();
+        }
 
-	}
+    }
 
-	///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
 
-	public static void download(String url, String data, boolean checkStatus, OutputStream out) {
-		HttpPost post = new HttpPost(url);
-		StringEntity se = null;
-		if (data != null) {
-			se = new StringEntity(data, DEFAULT_CHARSET);
-			post.setEntity(se);
-		}
-		try {
+    public static void download(String url, String data, boolean checkStatus, OutputStream out) {
+        HttpPost post = new HttpPost(url);
+        StringEntity se = null;
+        if (data != null) {
+            se = new StringEntity(data, DEFAULT_CHARSET);
+            post.setEntity(se);
+        }
+        try {
 
-			HttpResponse response = client.execute(post);
+            HttpResponse response = client.execute(post);
 
-			int status = response.getStatusLine().getStatusCode();
-			logger.info("http resp status is {}", status);
-			if (checkStatus) {
-				if (status != HttpStatus.SC_OK) {
-					throw new Exception("http resp code is not SC_OK");
-				}
-			}
-			IOUtils.copy(response.getEntity().getContent(), out);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			post.releaseConnection();
-			try {
-				out.close();
-			} catch (IOException e) {
-				// noop
-			}
-		}
+            int status = response.getStatusLine().getStatusCode();
+            logger.info("http resp status is {}", status);
+            if (checkStatus) {
+                if (status != HttpStatus.SC_OK) {
+                    throw new Exception("http resp code is not SC_OK");
+                }
+            }
+            IOUtils.copy(response.getEntity().getContent(), out);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            post.releaseConnection();
+            try {
+                out.close();
+            } catch (IOException e) {
+                // noop
+            }
+        }
 
-	}
+    }
 
-	/**
-	 * http请求的回调
-	 * 
-	 * @author liujixin
-	 */
-	public interface HttpCallBack {
+    /**
+     * http请求的回调
+     *
+     * @author liujixin
+     */
+    public interface HttpCallBack {
 
-		public void beforeHttp(HttpClient client, HttpRequestBase httpMethod, HttpEntity reqEntity) throws Exception;
+        public void beforeHttp(HttpClient client, HttpRequestBase httpMethod, HttpEntity reqEntity) throws Exception;
 
-		/**
-		 * 由于已经把返回的数据从response中读出来了，所以如果子类再次从response中读数据的话，会抛异常
-		 * 
-		 * @param client
-		 * @param response
-		 * @param respData
-		 * @throws Exception
-		 */
-		public void afterHttp(HttpClient client, HttpResponse response, String respData) throws Exception;
+        /**
+         * 由于已经把返回的数据从response中读出来了，所以如果子类再次从response中读数据的话，会抛异常
+         *
+         * @param client
+         * @param response
+         * @param respData
+         * @throws Exception
+         */
+        public void afterHttp(HttpClient client, HttpResponse response, String respData) throws Exception;
 
-		default void onException(HttpRequestBase httpMethod, Exception e) {
-			logger.error("发送http请求失败，{}，{}", e.getMessage());
-		}
-	}
+        default void onException(HttpRequestBase httpMethod, Exception e) {
+            logger.error("发送http请求失败，{}，{}", e.getMessage());
+        }
+    }
 }

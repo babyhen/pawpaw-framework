@@ -1,8 +1,7 @@
 package com.pawpaw.framework.exception;
 
-import com.pawpaw.common.exception.PawpawException;
 
-public class UNSupportException extends PawpawException {
+public class UNSupportException extends PawpawFrameworkException {
 
 
     public UNSupportException(String message) {
