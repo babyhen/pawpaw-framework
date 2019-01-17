@@ -12,10 +12,8 @@ public class PawpawDefaultMessageConverter extends MappingJackson2HttpMessageCon
 
     public PawpawDefaultMessageConverter() {
         super();
-    }
-
-    public PawpawDefaultMessageConverter(ObjectMapper objectMapper) {
-        super(objectMapper);
+        ObjectMapper om = this.getObjectMapper();
+        //TODO
     }
 
 

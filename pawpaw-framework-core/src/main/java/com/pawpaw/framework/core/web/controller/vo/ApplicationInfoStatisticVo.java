@@ -1,9 +1,6 @@
 package com.pawpaw.framework.core.web.controller.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author liujixin
@@ -14,6 +11,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
+@Getter
+@Setter
 public class ApplicationInfoStatisticVo {
 
     private long id;

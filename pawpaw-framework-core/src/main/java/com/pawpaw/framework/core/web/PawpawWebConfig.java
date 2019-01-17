@@ -18,8 +18,7 @@ public class PawpawWebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        converter.setJsonPrefix("111");
+        PawpawDefaultMessageConverter converter = new PawpawDefaultMessageConverter();
         //放在第一个位置
         converters.add(0, converter);
     }
