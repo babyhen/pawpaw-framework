@@ -5,6 +5,7 @@ package com.pawpaw.framework.core.common;
  *
  * @author liujixin
  */
-public interface IEnumType<T> {
-    public T value();
+public interface IEnumType {
+    public int value();
+
 }

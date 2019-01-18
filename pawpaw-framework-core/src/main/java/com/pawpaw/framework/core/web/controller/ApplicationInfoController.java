@@ -16,6 +16,7 @@ public class ApplicationInfoController {
     @GetMapping("/statistic")
     public ApplicationInfoStatisticVo statistic(HttpServletRequest request, HttpServletResponse response) {
         System.out.print(1);
+
         return new ApplicationInfoStatisticVo();
     }
 

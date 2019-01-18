@@ -1,5 +1,7 @@
 package com.pawpaw.framework.core.web;
 
+import java.beans.Transient;
+
 public class RemoteResult<T> {
     private RemoteResultCode code;
     private String message;
@@ -24,6 +26,7 @@ public class RemoteResult<T> {
         this.data = data;
     }
 
+    @Transient
     public boolean isSucc() {
         return this.code == RemoteResultCode.SUCC;
     }

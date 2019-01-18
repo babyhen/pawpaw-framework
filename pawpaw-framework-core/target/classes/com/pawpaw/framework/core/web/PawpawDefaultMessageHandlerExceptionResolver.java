@@ -1,7 +1,7 @@
 package com.pawpaw.framework.core.web;
 
 
-import com.pawpaw.framework.core.common.util.JsonUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pawpaw.framework.core.exception.PawpawFrameworkException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,19 +11,22 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 
 class PawpawDefaultMessageHandlerExceptionResolver implements HandlerExceptionResolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PawpawDefaultMessageHandlerExceptionResolver.class);
     private Charset charset;
+    private ObjectMapper objectMapper;
 
-    public PawpawDefaultMessageHandlerExceptionResolver() {
-        this("UTF-8");
+    public PawpawDefaultMessageHandlerExceptionResolver(ObjectMapper objectMapper) {
+        this(objectMapper, "UTF-8");
     }
 
-    public PawpawDefaultMessageHandlerExceptionResolver(String charset) {
+    public PawpawDefaultMessageHandlerExceptionResolver(ObjectMapper objectMapper, String charset) {
         this.charset = Charset.forName(charset);
+        this.objectMapper = objectMapper;
     }
 
 
@@ -42,17 +45,17 @@ class PawpawDefaultMessageHandlerExceptionResolver implements HandlerExceptionRe
                 PawpawFrameworkException pe = (PawpawFrameworkException) ex;
                 //这类异常是基本的业务上的异常，打印info级别即可个errormsg即可
                 LOGGER.info("PawpawException->url: {}, params: {},errMsg: {}", url, params, pe.getMessage());
-                br = new RemoteResult(RemoteResultCode.FAIL, pe.getMessage(),null);
+                br = new RemoteResult(RemoteResultCode.FAIL, pe.getMessage(), null);
             } else {
                 //这类异常是开发时期没有预料到的异常，需要把线程栈打印出来
                 LOGGER.error("Exception->url: {}, params: {},error: {}", url, params, ex);
-                br = new RemoteResult(RemoteResultCode.FAIL, ex.getMessage(),null);
+                br = new RemoteResult(RemoteResultCode.FAIL, ex.getMessage(), null);
             }
-
-            String str = JsonUtil.object2Json(br);
-            byte[] data = str.getBytes(this.charset);
+            byte[] data = this.objectMapper.writeValueAsBytes(br);
             if (data != null) {
-                response.getOutputStream().write(data);
+                OutputStream out = response.getOutputStream();
+                out.write(data);
+                out.flush();
             }
             //返回一个空的ModelAndView，来代表已经成功处理此异常
             return new ModelAndView();

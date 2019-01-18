@@ -6,7 +6,7 @@ import com.pawpaw.framework.core.common.IEnumType;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public enum RemoteResultCode implements IEnumType<Integer> {
+public enum RemoteResultCode implements IEnumType {
     SUCC(1, "成功"), FAIL(9999, "失败");
     ///////////////////////////////////////////
     private final int value;
@@ -19,7 +19,7 @@ public enum RemoteResultCode implements IEnumType<Integer> {
     }
 
     @Override
-    public Integer value() {
+    public int value() {
         return this.value;
     }
 
