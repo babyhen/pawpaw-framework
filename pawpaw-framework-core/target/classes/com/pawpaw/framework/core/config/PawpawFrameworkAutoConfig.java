@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({PawpawWebConfig.class, PawpawFeignConfig.class})
+@Import({PawpawFrameworkConfigProperty.class,PawpawWebConfig.class, PawpawFeignConfig.class})
 public class PawpawFrameworkAutoConfig {
 
 

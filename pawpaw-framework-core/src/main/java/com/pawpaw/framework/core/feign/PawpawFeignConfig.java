@@ -14,8 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Map;
 
 @Configuration
 public class PawpawFeignConfig {
@@ -25,8 +23,6 @@ public class PawpawFeignConfig {
     private PawpawFrameworkConfigProperty configProperty;
     @Autowired(required = false)
     private ServerProperties serverProperties;
-    @Autowired
-    private FeignRequestHeader requestHeader;
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -47,7 +43,7 @@ public class PawpawFeignConfig {
         }
         String port = "";
         if (this.serverProperties != null) {
-            port =String.valueOf(this.serverProperties.getPort());
+            port = String.valueOf(this.serverProperties.getPort());
         }
 
         return new FeignRequestHeader(id, ip, port, hostName);
@@ -60,11 +56,9 @@ public class PawpawFeignConfig {
     }
 
     @Bean
-    public Encoder getEncoder() {
-        Map<String, String> headers = new HashMap<>();
-
-
-        return new DefaultPawpawFeignEncoder(this.messageConverters);
+    @Autowired
+    public Encoder getEncoder(FeignRequestHeader requestHeader) {
+        return new DefaultPawpawFeignEncoder(this.messageConverters, requestHeader.getHeaders());
     }
 
 
