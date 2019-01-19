@@ -28,7 +28,6 @@ public class PawpawFeignConfig {
 
     @Bean
     public FeignRequestHeader getFeignRequestHeader() {
-        String appName = this.applicationContext.getApplicationName();
         String id = this.applicationContext.getId();
         String hostName = "";
         String ip = "";
@@ -43,7 +42,8 @@ public class PawpawFeignConfig {
         }
         String port = "";
         if (this.serverProperties != null) {
-            port = String.valueOf(this.serverProperties.getPort());
+            Integer p = this.serverProperties.getPort();
+            port = p == null ? "" : p.toString();
         }
 
         return new FeignRequestHeader(id, ip, port, hostName);
