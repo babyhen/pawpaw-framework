@@ -1,12 +1,7 @@
 package com.pawpaw.framework.core.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.pawpaw.framework.core.common.IEnumType;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
+import com.pawpaw.framework.core.factory.ObjectMapperFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -24,25 +19,6 @@ import java.util.stream.Collectors;
 @ComponentScan("com.pawpaw.framework.core.web")
 public class PawpawWebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    @Qualifier("globalObjectMapper")
-    private ObjectMapper globalObjectMapper;
-
-
-
-    @Bean
-    public ObjectMapper globalObjectMapper() {
-        ObjectMapper om = new ObjectMapper();
-        //配置om
-        om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        om.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        //对IEnumType的支持
-        SimpleModule module = new SimpleModule();
-        module.addSerializer(IEnumType.class, new IEnumTypeJsonSerializer());
-        om.registerModule(module);
-
-        return om;
-    }
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -51,7 +27,8 @@ public class PawpawWebConfig implements WebMvcConfigurer {
         }).collect(Collectors.toList());
         converters.clear();
         converters.addAll(notJacksonConverter);
-        converters.add(new PawpawGlobalMessageConverter(this.globalObjectMapper));
+        ObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
+        converters.add(new PawpawGlobalMessageConverter(objectMapper));
 
     }
 
@@ -62,7 +39,8 @@ public class PawpawWebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-        PawpawDefaultMessageHandlerExceptionResolver handler = new PawpawDefaultMessageHandlerExceptionResolver(this.globalObjectMapper);
+        ObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
+        PawpawDefaultMessageHandlerExceptionResolver handler = new PawpawDefaultMessageHandlerExceptionResolver(objectMapper);
         resolvers.add(handler);
     }
 

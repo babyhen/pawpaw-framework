@@ -1,6 +1,6 @@
 package com.pawpaw.framework.core.exception;
 
-public class PawpawFrameworkException extends Exception {
+public class PawpawFrameworkException extends RuntimeException {
 
     public PawpawFrameworkException(String message) {
         super(message);

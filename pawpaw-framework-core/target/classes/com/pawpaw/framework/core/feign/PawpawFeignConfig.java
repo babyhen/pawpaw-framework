@@ -1,0 +1,71 @@
+package com.pawpaw.framework.core.feign;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pawpaw.framework.core.config.PawpawFrameworkConfigProperty;
+import com.pawpaw.framework.core.factory.ObjectMapperFactory;
+import feign.codec.Decoder;
+import feign.codec.Encoder;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.net.InetAddress;
+import java.util.HashMap;
+import java.util.Map;
+
+@Configuration
+public class PawpawFeignConfig {
+    @Autowired
+    private ObjectFactory<HttpMessageConverters> messageConverters;
+    @Autowired
+    private PawpawFrameworkConfigProperty configProperty;
+    @Autowired(required = false)
+    private ServerProperties serverProperties;
+    @Autowired
+    private FeignRequestHeader requestHeader;
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    @Bean
+    public FeignRequestHeader getFeignRequestHeader() {
+        String appName = this.applicationContext.getApplicationName();
+        String id = this.applicationContext.getId();
+        String hostName = "";
+        String ip = "";
+        try {
+            InetAddress addr = InetAddress.getLocalHost();
+            //获取本机ip
+            ip = addr.getHostAddress().toString();
+            //获取本机计算机名称
+            hostName = addr.getHostName().toString();
+        } catch (Exception e) {
+            //noop
+        }
+        String port = "";
+        if (this.serverProperties != null) {
+            port =String.valueOf(this.serverProperties.getPort());
+        }
+
+        return new FeignRequestHeader(id, ip, port, hostName);
+    }
+
+    @Bean
+    public Decoder getDecoder() {
+        ObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
+        return new RemoteResultFeignDeocder(messageConverters, objectMapper, "utf-8");
+    }
+
+    @Bean
+    public Encoder getEncoder() {
+        Map<String, String> headers = new HashMap<>();
+
+
+        return new DefaultPawpawFeignEncoder(this.messageConverters);
+    }
+
+
+}
