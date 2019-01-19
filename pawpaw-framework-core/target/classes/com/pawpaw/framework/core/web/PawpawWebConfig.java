@@ -2,7 +2,10 @@ package com.pawpaw.framework.core.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.pawpaw.framework.core.common.IEnumType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,15 +25,21 @@ import java.util.stream.Collectors;
 public class PawpawWebConfig implements WebMvcConfigurer {
 
     @Autowired
+    @Qualifier("globalObjectMapper")
     private ObjectMapper globalObjectMapper;
 
 
     @Bean
-    public ObjectMapper buildGlobalObjectMapper() {
+    public ObjectMapper globalObjectMapper() {
         ObjectMapper om = new ObjectMapper();
         //配置om
         om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         om.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        //对IEnumType的支持
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(IEnumType.class, new IEnumTypeJsonSerializer());
+        om.registerModule(module);
+
         return om;
     }
 
