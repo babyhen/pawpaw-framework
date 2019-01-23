@@ -2,6 +2,7 @@ package com.pawpaw.framework.core.web.controller;
 
 import com.pawpaw.framework.core.web.controller.vo.ApplicationInfoStatisticVo;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,11 @@ public class ApplicationInfoController {
         return new ApplicationInfoStatisticVo();
     }
 
+
+    @PostMapping("/shutdown")
+    public void shutdown() {
+        System.out.println("shutdown");
+        System.exit(0);
+    }
 
 }
