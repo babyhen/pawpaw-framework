@@ -1,10 +1,10 @@
-package com.pawpaw.framework.core.factory;
+package com.pawpaw.framework.core.factory.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.pawpaw.framework.core.common.IEnumType;
-import com.pawpaw.framework.core.web.IEnumTypeJsonSerializer;
+import com.pawpaw.framework.core.factory.json.IEnumTypeJsonSerializer;
 
 /**
  * @author liujixin

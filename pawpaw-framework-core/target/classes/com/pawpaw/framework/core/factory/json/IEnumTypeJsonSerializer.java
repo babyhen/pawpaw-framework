@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.web;
+package com.pawpaw.framework.core.factory.json;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * @description
  */
 
-public class IEnumTypeJsonSerializer extends StdScalarSerializer<IEnumType> {
+class IEnumTypeJsonSerializer extends StdScalarSerializer<IEnumType> {
 
     public IEnumTypeJsonSerializer() {
         super(IEnumType.class);

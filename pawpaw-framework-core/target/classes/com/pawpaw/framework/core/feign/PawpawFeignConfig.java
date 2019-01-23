@@ -2,7 +2,7 @@ package com.pawpaw.framework.core.feign;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pawpaw.framework.core.config.PawpawFrameworkConfigProperty;
-import com.pawpaw.framework.core.factory.ObjectMapperFactory;
+import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import org.springframework.beans.factory.ObjectFactory;

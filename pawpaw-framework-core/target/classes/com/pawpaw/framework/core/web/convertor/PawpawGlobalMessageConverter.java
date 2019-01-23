@@ -1,7 +1,10 @@
-package com.pawpaw.framework.core.web;
+package com.pawpaw.framework.core.web.convertor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pawpaw.framework.core.web.RemoteResult;
+import com.pawpaw.framework.core.web.interceptor.ThreadHandlerMapInterceptor;
 import org.springframework.http.HttpOutputMessage;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -17,6 +20,24 @@ public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConv
 
     public PawpawGlobalMessageConverter(ObjectMapper objectMapper) {
         super(objectMapper);
+    }
+
+    @Override
+    public boolean canWrite(Class<?> clazz, MediaType mediaType) {
+        boolean superCanWrite = super.canWrite(clazz, mediaType);
+        if (!superCanWrite) {
+            return false;
+        }
+        //这里只需要编码那些pawpaw包里面的controller的响应，不解析其他框架的响应。避免对那些响应造成影响
+        Object handler = ThreadHandlerMapInterceptor.ThreadHandlerMappingHolder.get();
+        if (handler == null) {
+            return false;
+        }
+        String cName = handler.getClass().getName();
+        if (cName.startsWith("com.pawpaw")) {
+            return true;
+        }
+        return false;
     }
 
     /**
