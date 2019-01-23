@@ -7,6 +7,7 @@ import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.method.HandlerMethod;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -33,10 +34,18 @@ public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConv
         if (handler == null) {
             return false;
         }
-        String cName = handler.getClass().getName();
-        if (cName.startsWith("com.pawpaw")) {
-            return true;
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod hm = (HandlerMethod) handler;
+            Object controller = hm.getBean();
+            if (controller == null) {
+                return false;
+            }
+            String cName = controller.getClass().getName();
+            if (cName.startsWith("com.pawpaw")) {
+                return true;
+            }
         }
+
         return false;
     }
 
