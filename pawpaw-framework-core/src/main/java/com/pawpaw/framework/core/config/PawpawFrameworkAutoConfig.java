@@ -35,15 +35,42 @@ public class PawpawFrameworkAutoConfig {
             throw new RuntimeException("获取进程id失败");
         }
         String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
-        logger.info("jar file path :{}", path);
-        File classFile = new File(path);
-        File parentFile = classFile.getParentFile();
+        if (StringUtils.contains(path, ".jar!")) {
+            int i = StringUtils.indexOf(path, ".jar!");
+            path = StringUtils.substring(path, 0, i + 4);
+            logger.info("jar file path :{}", path);
+        }
+
+
+        File f = new File(path);
+        File parentFile = f.getParentFile();
         File pidFile = new File(parentFile, "PID");
+        if (pidFile.exists()) {
+            pidFile.delete();
+        }
+        pidFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(pidFile);
         IOUtils.write(pid, fos);
         IOUtils.closeQuietly(fos);
 
     }
 
+
+    public static  void main(String[] args) throws Exception {
+        File f = new File("file:/Users/jixinliu/projects/pawpaw/registry-server/target/registry-server-1.0.0.jar");
+        File parentFile = f.getParentFile();
+        System.out.println(parentFile);
+        System.out.println(parentFile.exists());
+        File pidFile = new File(parentFile, "PID");
+        if (pidFile.exists()) {
+            pidFile.delete();
+        }
+        pidFile.createNewFile();
+        FileOutputStream fos = new FileOutputStream(pidFile);
+        IOUtils.write("123", fos);
+        IOUtils.closeQuietly(fos);
+
+
+    }
 
 }
