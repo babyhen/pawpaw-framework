@@ -1,5 +1,6 @@
 package com.pawpaw.framework.core.config;
 
+import com.pawpaw.framework.core.common.util.FileUtil;
 import com.pawpaw.framework.core.feign.PawpawFeignConfig;
 import com.pawpaw.framework.core.web.PawpawWebConfig;
 import org.apache.commons.io.IOUtils;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.net.URISyntaxException;
 
 
 @Configuration
@@ -25,7 +27,7 @@ public class PawpawFrameworkAutoConfig {
      * 在jar文件的目录生成pid文件，标志当前进程的id
      */
     @PostConstruct
-    public void genPidFile() throws IOException {
+    public void genPidFile() throws IOException, URISyntaxException {
         String name = ManagementFactory.getRuntimeMXBean().getName();
         if (StringUtils.isBlank(name)) {
             throw new RuntimeException("获取进程id失败");
@@ -34,43 +36,15 @@ public class PawpawFrameworkAutoConfig {
         if (StringUtils.isBlank(pid)) {
             throw new RuntimeException("获取进程id失败");
         }
-        String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile();
-        if (StringUtils.contains(path, ".jar!")) {
-            int i = StringUtils.indexOf(path, ".jar!");
-            path = StringUtils.substring(path, 0, i + 4);
-            logger.info("jar file path :{}", path);
-        }
 
-
-        File f = new File(path);
-        File parentFile = f.getParentFile();
-        File pidFile = new File(parentFile, "PID");
-        if (pidFile.exists()) {
-            pidFile.delete();
-        }
-        pidFile.createNewFile();
-        FileOutputStream fos = new FileOutputStream(pidFile);
+        String jarFile = FileUtil.getJarFilePath();
+        String parent = new File(jarFile).getParent();
+        logger.info("generate pid file at dir {} for pid {}", parent, pid);
+        FileOutputStream fos = new FileOutputStream(new File(parent, "PID"));
         IOUtils.write(pid, fos);
         IOUtils.closeQuietly(fos);
 
     }
 
-
-    public static  void main(String[] args) throws Exception {
-        File f = new File("file:/Users/jixinliu/projects/pawpaw/registry-server/target/registry-server-1.0.0.jar");
-        File parentFile = f.getParentFile();
-        System.out.println(parentFile);
-        System.out.println(parentFile.exists());
-        File pidFile = new File(parentFile, "PID");
-        if (pidFile.exists()) {
-            pidFile.delete();
-        }
-        pidFile.createNewFile();
-        FileOutputStream fos = new FileOutputStream(pidFile);
-        IOUtils.write("123", fos);
-        IOUtils.closeQuietly(fos);
-
-
-    }
 
 }
