@@ -7,6 +7,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -23,8 +25,35 @@ import java.net.URISyntaxException;
 public class PawpawFrameworkAutoConfig {
     private static final Logger logger = LoggerFactory.getLogger(PawpawFrameworkAutoConfig.class);
 
+    @Autowired(required = false)
+    private ServerProperties serverProperties;
+
+
     /**
-     * 在jar文件的目录生成pid文件，标志当前进程的id
+     * 生成文件
+     */
+    @PostConstruct
+    public void genPortFile() throws IOException, URISyntaxException {
+        if (this.serverProperties == null) {
+            logger.info("server properties bean is missing,can not gen port file");
+            return;
+        }
+        Integer port = serverProperties.getPort();
+        if (port == null) {
+            port = 8080;
+        }
+        String jarFile = FileUtil.getJarFilePath();
+        String parent = new File(jarFile).getParent();
+        logger.info("generate port file at dir {} for port {}", parent, port);
+        FileOutputStream fos = new FileOutputStream(new File(parent, "PORT"));
+        IOUtils.write(port.toString(), fos);
+        IOUtils.closeQuietly(fos);
+
+    }
+
+
+    /**
+     * 生成文件
      */
     @PostConstruct
     public void genPidFile() throws IOException, URISyntaxException {
