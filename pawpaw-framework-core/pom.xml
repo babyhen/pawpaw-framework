@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.pawpaw</groupId>
     <artifactId>pawpaw-framework-core</artifactId>
-    
+
     <packaging>jar</packaging>
 
     <name>pawpaw-framework-core</name>
@@ -111,11 +111,16 @@
         </dependency>
 
 
-       <dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
