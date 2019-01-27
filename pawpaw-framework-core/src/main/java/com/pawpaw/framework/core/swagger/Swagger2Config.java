@@ -27,7 +27,7 @@ public class Swagger2Config {
 
     @Autowired
     @Bean
-    @ConditionalOnBean({EurekaInstanceConfig.class, ServerProperties.class})
+    //@ConditionalOnBean({EurekaInstanceConfigBean.class, ServerProperties.class})
     public Docket api(ServerProperties serverProperty, EurekaInstanceConfigBean instanceConfigBean) {
 
         String host = SystemUtil.getIPOrHostName();
