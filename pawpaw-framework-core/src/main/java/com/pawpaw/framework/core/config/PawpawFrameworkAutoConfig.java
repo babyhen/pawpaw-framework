@@ -2,6 +2,7 @@ package com.pawpaw.framework.core.config;
 
 import com.pawpaw.framework.core.common.util.FileUtil;
 import com.pawpaw.framework.core.feign.PawpawFeignConfig;
+import com.pawpaw.framework.core.swagger.Swagger2Config;
 import com.pawpaw.framework.core.web.PawpawWebConfig;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -21,7 +22,7 @@ import java.net.URISyntaxException;
 
 
 @Configuration
-@Import({PawpawFrameworkConfigProperty.class, PawpawWebConfig.class, PawpawFeignConfig.class})
+@Import({PawpawFrameworkConfigProperty.class, PawpawWebConfig.class, PawpawFeignConfig.class, Swagger2Config.class})
 public class PawpawFrameworkAutoConfig {
     private static final Logger logger = LoggerFactory.getLogger(PawpawFrameworkAutoConfig.class);
 
