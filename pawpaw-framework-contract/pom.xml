@@ -11,7 +11,7 @@
     </parent>
     <groupId>com.pawpaw</groupId>
     <artifactId>pawpaw-framework-contract</artifactId>
-    
+
     <packaging>jar</packaging>
 
     <name>pawpaw-framework-contract</name>
@@ -26,7 +26,10 @@
 
 
     <dependencies>
-
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
 
 
     </dependencies>
