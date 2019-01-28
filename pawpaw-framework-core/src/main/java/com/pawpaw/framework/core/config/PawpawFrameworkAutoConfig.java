@@ -22,7 +22,7 @@ import java.net.URISyntaxException;
 
 
 @Configuration
-@Import({PawpawFrameworkConfigProperty.class, PawpawWebConfig.class, PawpawFeignConfig.class, Swagger2Config.class})
+@Import({PawpawWebConfig.class, PawpawFeignConfig.class, Swagger2Config.class})
 public class PawpawFrameworkAutoConfig {
     private static final Logger logger = LoggerFactory.getLogger(PawpawFrameworkAutoConfig.class);
 

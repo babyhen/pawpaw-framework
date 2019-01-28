@@ -1,7 +1,6 @@
 package com.pawpaw.framework.core.feign;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pawpaw.framework.core.config.PawpawFrameworkConfigProperty;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
@@ -19,8 +18,7 @@ import java.net.InetAddress;
 public class PawpawFeignConfig {
     @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
-    @Autowired
-    private PawpawFrameworkConfigProperty configProperty;
+
     @Autowired(required = false)
     private ServerProperties serverProperties;
     @Autowired
