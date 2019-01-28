@@ -20,14 +20,12 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@AutoConfigureAfter({EurekaClientAutoConfiguration.class, EmbeddedWebServerFactoryCustomizerAutoConfiguration.class})
 @EnableSwagger2
 public class Swagger2Config {
 
 
     @Autowired
     @Bean
-    //@ConditionalOnBean({EurekaInstanceConfigBean.class, ServerProperties.class})
     public Docket api(ServerProperties serverProperty, EurekaInstanceConfigBean instanceConfigBean) {
 
         String host = SystemUtil.getIPOrHostName();
