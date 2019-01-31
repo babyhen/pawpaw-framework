@@ -1,20 +1,19 @@
 package com.pawpaw.framework.core.feign;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.netflix.appinfo.EurekaInstanceConfig;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import java.net.InetAddress;
-
-@Configuration
 public class PawpawFeignConfig {
     @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
@@ -24,27 +23,14 @@ public class PawpawFeignConfig {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Autowired
     @Bean
-    public FeignRequestHeader getFeignRequestHeader() {
-        String id = this.applicationContext.getId();
-        String hostName = "";
-        String ip = "";
-        try {
-            InetAddress addr = InetAddress.getLocalHost();
-            //获取本机ip
-            ip = addr.getHostAddress().toString();
-            //获取本机计算机名称
-            hostName = addr.getHostName().toString();
-        } catch (Exception e) {
-            //noop
-        }
-        String port = "";
-        if (this.serverProperties != null) {
-            Integer p = this.serverProperties.getPort();
-            port = p == null ? "" : p.toString();
-        }
-
-        return new FeignRequestHeader(id, ip, port, hostName);
+    public FeignRequestHeader getFeignRequestHeader(EurekaInstanceConfig eurekaInstanceConfig) {
+        String ip = eurekaInstanceConfig.getIpAddress();
+        int port = eurekaInstanceConfig.getNonSecurePort();
+        String hostName = eurekaInstanceConfig.getHostName(true);
+        String appName = eurekaInstanceConfig.getAppname();
+        return new FeignRequestHeader(appName, ip, port, hostName);
     }
 
     @Bean
