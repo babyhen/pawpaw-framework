@@ -1,13 +1,7 @@
 package com.pawpaw.framework.core.swagger;
 
-import com.netflix.appinfo.EurekaInstanceConfig;
-import com.pawpaw.framework.core.common.util.SystemUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration;
-import org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,12 +22,14 @@ public class Swagger2Config {
     @Bean
     public Docket api(ServerProperties serverProperty, EurekaInstanceConfigBean instanceConfigBean) {
 
-        String host = SystemUtil.getIPOrHostName();
-        Integer port = serverProperty.getPort();
+        String ip = instanceConfigBean.getIpAddress();
+        int port = instanceConfigBean.getNonSecurePort();
+
+      /*  Integer port = serverProperty.getPort();
         if (port == null) {
             port = 8080;
-        }
-        String swaggerIndex = "http://" + host + ":" + port + "/swagger-ui.html";
+        }*/
+        String swaggerIndex = "http://" + ip + ":" + port + "/swagger-ui.html";
         instanceConfigBean.setStatusPageUrl(swaggerIndex);
 
         Docket docket = new Docket(DocumentationType.SWAGGER_2)

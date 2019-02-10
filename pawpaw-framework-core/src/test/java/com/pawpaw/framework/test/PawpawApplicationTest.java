@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.test;
+package com.pawpaw.framework.test;
 
 import com.pawpaw.framework.core.PawpawApplication;
 import io.swagger.annotations.ApiOperation;
