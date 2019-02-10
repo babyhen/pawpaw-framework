@@ -3,10 +3,7 @@ package com.pawpaw.framework.core.web;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
 import com.pawpaw.framework.core.web.convertor.PawpawGlobalMessageConverter;
-import com.pawpaw.framework.core.web.interceptor.PrintProcessTimeInterceptor;
-import com.pawpaw.framework.core.web.interceptor.PrintRequestDataInterceptor;
-import com.pawpaw.framework.core.web.interceptor.ThreadHandlerMapInterceptor;
-import com.pawpaw.framework.core.web.interceptor.UrlCalledCounterInterceptor;
+import com.pawpaw.framework.core.web.interceptor.*;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -35,6 +32,7 @@ public class PawpawWebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new PrintRequestDataInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new ThreadHandlerMapInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new UrlCalledCounterInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new PrintFeignClientHeaderInterceptor()).addPathPatterns("/**");
     }
 
     @Override

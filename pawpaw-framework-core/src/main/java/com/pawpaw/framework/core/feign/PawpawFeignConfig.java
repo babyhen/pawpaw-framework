@@ -7,10 +7,8 @@ import feign.codec.Decoder;
 import feign.codec.Encoder;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.cloud.netflix.eureka.EurekaInstanceConfigBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
@@ -30,7 +28,7 @@ public class PawpawFeignConfig {
         int port = eurekaInstanceConfig.getNonSecurePort();
         String hostName = eurekaInstanceConfig.getHostName(true);
         String appName = eurekaInstanceConfig.getAppname();
-        return new FeignRequestHeader(appName, ip, port, hostName);
+        return new FeignRequestHeader(appName, ip, String.valueOf(port), hostName);
     }
 
     @Bean

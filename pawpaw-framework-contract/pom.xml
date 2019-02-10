@@ -12,7 +12,7 @@
     <groupId>com.pawpaw</groupId>
     <artifactId>pawpaw-framework-contract</artifactId>
 
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>pawpaw-framework-contract</name>
     <url>www.pawpaw.com</url>
