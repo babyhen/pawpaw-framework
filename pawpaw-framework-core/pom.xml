@@ -29,6 +29,13 @@
 
         <dependency>
             <groupId>com.pawpaw</groupId>
+            <artifactId>user-server-contract</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.pawpaw</groupId>
             <artifactId>pawpaw-framework-contract</artifactId>
             <version>1.0</version>
         </dependency>
