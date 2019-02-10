@@ -36,7 +36,7 @@ public class PawpawApplicationTest {
 
     @GetMapping("/testFeign")
     public void testFeign() {
-        RegistUserResp resp = this.controller.registByMobile(null, "18810765133", "六");
+        RegistUserResp resp = this.controller.registByMobile(null, "18810765135", "六");
         System.out.println(resp);
     }
 
