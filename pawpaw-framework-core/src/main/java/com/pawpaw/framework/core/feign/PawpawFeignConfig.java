@@ -9,18 +9,24 @@ import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
+@Configuration
+@ComponentScan("com.pawpaw.framework.core.feign")
 public class PawpawFeignConfig {
     @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
 
-
+    @Primary
     @Bean
     public Decoder getDecoder() {
         PawpawObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
         return new RemoteResultFeignDeocder(messageConverters, objectMapper, "utf-8");
     }
 
+    @Primary
     @Bean
     @Autowired
     public Encoder getEncoder(EurekaInstanceConfig eurekaInstanceConfig) {
