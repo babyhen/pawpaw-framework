@@ -3,6 +3,7 @@ package com.pawpaw.framework.core.feign;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.EurekaInstanceConfig;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
+import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
 import feign.codec.Decoder;
 import feign.codec.Encoder;
 import org.springframework.beans.factory.ObjectFactory;
@@ -16,11 +17,6 @@ public class PawpawFeignConfig {
     @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
 
-    @Autowired(required = false)
-    private ServerProperties serverProperties;
-    @Autowired
-    private ApplicationContext applicationContext;
-
     @Autowired
     @Bean
     public FeignRequestHeader getFeignRequestHeader(EurekaInstanceConfig eurekaInstanceConfig) {
@@ -33,7 +29,7 @@ public class PawpawFeignConfig {
 
     @Bean
     public Decoder getDecoder() {
-        ObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
+        PawpawObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
         return new RemoteResultFeignDeocder(messageConverters, objectMapper, "utf-8");
     }
 

@@ -13,11 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RunWith(SpringRunner.class)
 @SpringBootApplication
 @EnableFeignClients("com.pawpaw.userserver")
-@Controller
+@RestController
 public class PawpawApplicationTest {
 
     @Autowired
@@ -35,9 +36,10 @@ public class PawpawApplicationTest {
 
 
     @GetMapping("/testFeign")
-    public void testFeign() {
+    public String  testFeign() {
         RegistUserResp resp = this.controller.registByMobile(null, "18810765135", "六");
         System.out.println(resp);
+        return "succ";
     }
 
 }

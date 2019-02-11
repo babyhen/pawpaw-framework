@@ -3,6 +3,8 @@ package com.pawpaw.framework.core.web;
 
 import com.pawpaw.framework.core.common.IEnumType;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,6 +23,12 @@ public enum RemoteResultCode implements IEnumType {
     @Override
     public int value() {
         return this.value;
+    }
+
+    @Override
+    public Collection<? extends IEnumType> allValues() {
+        RemoteResultCode[] arr = RemoteResultCode.values();
+        return Arrays.asList(arr);
     }
 
 

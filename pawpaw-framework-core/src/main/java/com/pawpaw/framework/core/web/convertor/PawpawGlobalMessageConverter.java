@@ -1,6 +1,7 @@
 package com.pawpaw.framework.core.web.convertor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
 import com.pawpaw.framework.core.web.RemoteResult;
 import com.pawpaw.framework.core.web.interceptor.ThreadHandlerMapInterceptor;
 import org.springframework.http.HttpOutputMessage;
@@ -19,8 +20,8 @@ import java.lang.reflect.Type;
  */
 public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConverter {
 
-    public PawpawGlobalMessageConverter(ObjectMapper objectMapper) {
-        super(objectMapper);
+    public PawpawGlobalMessageConverter(PawpawObjectMapper objectMapper) {
+        super(objectMapper.getRawObjectMapper());
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.pawpaw.framework.core.feign;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
 import com.pawpaw.framework.core.web.RemoteResult;
 import feign.FeignException;
 import feign.Response;
@@ -24,10 +25,10 @@ import java.nio.charset.Charset;
 @Slf4j
 public class RemoteResultFeignDeocder extends SpringDecoder {
     private final Charset defaultCharSet;
-    private final ObjectMapper objectMapper;
+    private final PawpawObjectMapper objectMapper;
 
 
-    public RemoteResultFeignDeocder(ObjectFactory<HttpMessageConverters> messageConverters, ObjectMapper ObjectMapper, String charset) {
+    public RemoteResultFeignDeocder(ObjectFactory<HttpMessageConverters> messageConverters, PawpawObjectMapper ObjectMapper, String charset) {
         super(messageConverters);
         this.defaultCharSet = Charset.forName(charset);
         this.objectMapper = ObjectMapper;
@@ -36,7 +37,7 @@ public class RemoteResultFeignDeocder extends SpringDecoder {
     @Override
     public Object decode(Response response, Type type) throws IOException, DecodeException, FeignException {
         String remoteResp = IOUtils.toString(response.body().asInputStream(), this.defaultCharSet.name());
-        RemoteResult<String> o = this.objectMapper.readValue(remoteResp, new TypeReference<RemoteResult<String>>() {
+        RemoteResult<Object> o = this.objectMapper.getRawObjectMapper().readValue(remoteResp, new TypeReference<RemoteResult<Object>>() {
         });
         if (o == null) {
             throw new DecodeException("响应结果不能转换成RemoteResult类型");
@@ -48,7 +49,9 @@ public class RemoteResultFeignDeocder extends SpringDecoder {
             sb.append(",message=" + o.getMessage());
             throw new IOException(sb.toString());
         }
-        Response.Body body = new RemoteResultInnerBody(o.getData(),this.defaultCharSet);
+        Object data = o.getData();
+        String dataStr = this.objectMapper.getRawObjectMapper().writeValueAsString(data);
+        Response.Body body = new RemoteResultInnerBody(dataStr, this.defaultCharSet);
         //构造脱掉外壳的数据传递给父类处理
         Response.Builder builder = Response.builder();
         builder.status(response.status());

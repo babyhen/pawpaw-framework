@@ -1,8 +1,8 @@
 package com.pawpaw.framework.core.web;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pawpaw.framework.core.exception.PawpawFrameworkException;
+import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -18,13 +18,13 @@ class PawpawDefaultMessageHandlerExceptionResolver implements HandlerExceptionRe
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PawpawDefaultMessageHandlerExceptionResolver.class);
     private Charset charset;
-    private ObjectMapper objectMapper;
+    private PawpawObjectMapper objectMapper;
 
-    public PawpawDefaultMessageHandlerExceptionResolver(ObjectMapper objectMapper) {
+    public PawpawDefaultMessageHandlerExceptionResolver(PawpawObjectMapper objectMapper) {
         this(objectMapper, "UTF-8");
     }
 
-    public PawpawDefaultMessageHandlerExceptionResolver(ObjectMapper objectMapper, String charset) {
+    public PawpawDefaultMessageHandlerExceptionResolver(PawpawObjectMapper objectMapper, String charset) {
         this.charset = Charset.forName(charset);
         this.objectMapper = objectMapper;
     }
@@ -51,7 +51,7 @@ class PawpawDefaultMessageHandlerExceptionResolver implements HandlerExceptionRe
                 LOGGER.error("Exception->url: {}, params: {},error: {}", url, params, ex);
                 br = new RemoteResult(RemoteResultCode.FAIL, ex.getMessage(), null);
             }
-            byte[] data = this.objectMapper.writeValueAsBytes(br);
+            byte[] data = this.objectMapper.getRawObjectMapper().writeValueAsBytes(br);
             if (data != null) {
                 OutputStream out = response.getOutputStream();
                 out.write(data);

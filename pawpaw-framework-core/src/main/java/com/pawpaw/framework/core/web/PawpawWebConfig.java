@@ -2,6 +2,7 @@ package com.pawpaw.framework.core.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
+import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
 import com.pawpaw.framework.core.web.convertor.PawpawGlobalMessageConverter;
 import com.pawpaw.framework.core.web.interceptor.*;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +21,7 @@ public class PawpawWebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        ObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
+        PawpawObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
         converters.add(0, new PawpawGlobalMessageConverter(objectMapper));
 
     }
@@ -37,7 +38,7 @@ public class PawpawWebConfig implements WebMvcConfigurer {
 
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-        ObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
+        PawpawObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
         PawpawDefaultMessageHandlerExceptionResolver handler = new PawpawDefaultMessageHandlerExceptionResolver(objectMapper);
         resolvers.add(handler);
     }
