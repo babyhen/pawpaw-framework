@@ -15,8 +15,8 @@
 
 
     <modules>
-        <module>pawpaw-framework-core</module>
         <module>pawpaw-framework-contract</module>
+        <module>pawpaw-framework-core</module>
     </modules>
 
 </project>
