@@ -1,7 +1,6 @@
 package com.pawpaw.framework.core.ali;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 /**
  * @author liujixin
@@ -20,7 +19,15 @@ public class AliConfigProperties {
     private String accessKey;
     private String secrectKey;
     private String domainName;
+    private String smsSignName;
 
+    public String getSmsSignName() {
+        return smsSignName;
+    }
+
+    public void setSmsSignName(String smsSignName) {
+        this.smsSignName = smsSignName;
+    }
 
     public String getAccessKey() {
         return accessKey;
