@@ -1,8 +1,9 @@
 package com.pawpaw.framework.core.web.convertor;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pawpaw.framework.core.codec.RemoteResult;
+import com.pawpaw.framework.core.codec.ResultEncoder;
+import com.pawpaw.framework.core.common.util.PawpawFrameworkUtil;
 import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
-import com.pawpaw.framework.core.web.RemoteResult;
 import com.pawpaw.framework.core.web.interceptor.ThreadHandlerMapInterceptor;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -20,8 +21,11 @@ import java.lang.reflect.Type;
  */
 public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConverter {
 
-    public PawpawGlobalMessageConverter(PawpawObjectMapper objectMapper) {
+    private final ResultEncoder resultEncoder;
+
+    public PawpawGlobalMessageConverter(PawpawObjectMapper objectMapper, ResultEncoder resultEncoder) {
         super(objectMapper.getRawObjectMapper());
+        this.resultEncoder = resultEncoder;
     }
 
     @Override
@@ -42,7 +46,7 @@ public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConv
                 return false;
             }
             String cName = controller.getClass().getName();
-            if (cName.startsWith("com.pawpaw")) {
+            if (PawpawFrameworkUtil.isPawpawPackageClass(cName)) {
                 return true;
             }
         }
@@ -50,17 +54,10 @@ public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConv
         return false;
     }
 
-    /**
-     * 这里把返回的对象加上公共的{@link RemoteResult}
-     */
+
     @Override
     protected void writeInternal(Object object, Type type, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-        if (object instanceof RemoteResult) {
-            super.writeInternal(object, type, outputMessage);
-        } else {
-            RemoteResult rr = new RemoteResult(object);
-            super.writeInternal(rr, type, outputMessage);
-        }
-
+        RemoteResult<? extends Object> encoded = this.resultEncoder.encode(object);
+        super.writeInternal(encoded, type, outputMessage);
     }
 }

@@ -1,9 +1,7 @@
 package com.pawpaw.framework.core.feign;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
-import com.pawpaw.framework.core.web.RemoteResult;
+import com.pawpaw.framework.core.codec.ResultDeocder;
+import com.pawpaw.framework.core.common.util.PawpawFrameworkUtil;
 import feign.FeignException;
 import feign.Response;
 import feign.codec.DecodeException;
@@ -25,34 +23,26 @@ import java.nio.charset.Charset;
 @Slf4j
 public class RemoteResultFeignDeocder extends SpringDecoder {
     private final Charset defaultCharSet;
-    private final PawpawObjectMapper objectMapper;
+    private final ResultDeocder resultDeocder;
 
 
-    public RemoteResultFeignDeocder(ObjectFactory<HttpMessageConverters> messageConverters, PawpawObjectMapper ObjectMapper, String charset) {
+    public RemoteResultFeignDeocder(ObjectFactory<HttpMessageConverters> messageConverters, ResultDeocder resultDeocder, String charset) {
         super(messageConverters);
+        this.resultDeocder = resultDeocder;
         this.defaultCharSet = Charset.forName(charset);
-        this.objectMapper = ObjectMapper;
     }
 
     @Override
     public Object decode(Response response, Type type) throws IOException, DecodeException, FeignException {
+        // 如果不是pawpaw范围内的类，则使用默认的解码器
+        if (!PawpawFrameworkUtil.isPawpawPackageClass(type)) {
+            return super.decode(response, type);
+        }
+        // 如果是pawpaw包的话，就使用约定好的格式解码
         String remoteResp = IOUtils.toString(response.body().asInputStream(), this.defaultCharSet.name());
-        RemoteResult<Object> o = this.objectMapper.getRawObjectMapper().readValue(remoteResp, new TypeReference<RemoteResult<Object>>() {
-        });
-        if (o == null) {
-            throw new DecodeException("响应结果不能转换成RemoteResult类型");
-        }
-        if (!o.isSucc()) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("调用远程接口失败");
-            sb.append(",code=" + o.getCode());
-            sb.append(",message=" + o.getMessage());
-            throw new IOException(sb.toString());
-        }
-        Object data = o.getData();
-        String dataStr = this.objectMapper.getRawObjectMapper().writeValueAsString(data);
-        Response.Body body = new RemoteResultInnerBody(dataStr, this.defaultCharSet);
+        String dataStr = this.resultDeocder.decode(remoteResp);
         //构造脱掉外壳的数据传递给父类处理
+        Response.Body body = new RemoteResultInnerBody(dataStr, this.defaultCharSet);
         Response.Builder builder = Response.builder();
         builder.status(response.status());
         builder.reason(response.reason());

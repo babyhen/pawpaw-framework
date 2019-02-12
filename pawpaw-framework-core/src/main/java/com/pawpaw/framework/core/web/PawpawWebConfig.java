@@ -1,6 +1,6 @@
 package com.pawpaw.framework.core.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pawpaw.framework.core.codec.ResultEncoder;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
 import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
 import com.pawpaw.framework.core.web.convertor.PawpawGlobalMessageConverter;
@@ -22,7 +22,8 @@ public class PawpawWebConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         PawpawObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
-        converters.add(0, new PawpawGlobalMessageConverter(objectMapper));
+        ResultEncoder encoder = new ResultEncoder();
+        converters.add(0, new PawpawGlobalMessageConverter(objectMapper, encoder));
 
     }
 
@@ -39,7 +40,8 @@ public class PawpawWebConfig implements WebMvcConfigurer {
     @Override
     public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
         PawpawObjectMapper objectMapper = ObjectMapperFactory.defaultObjectMapper();
-        PawpawDefaultMessageHandlerExceptionResolver handler = new PawpawDefaultMessageHandlerExceptionResolver(objectMapper);
+        ResultEncoder resultEncoder = new ResultEncoder();
+        PawpawDefaultMessageHandlerExceptionResolver handler = new PawpawDefaultMessageHandlerExceptionResolver(objectMapper, resultEncoder);
         resolvers.add(handler);
     }
 
