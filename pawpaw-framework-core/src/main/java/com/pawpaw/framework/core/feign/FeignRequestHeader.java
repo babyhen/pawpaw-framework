@@ -2,9 +2,7 @@ package com.pawpaw.framework.core.feign;
 
 import lombok.ToString;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author liujixin
@@ -19,23 +17,35 @@ public class FeignRequestHeader {
     public static final String feignRequestHeaderNameHostName = "ReqHostName";
     public static final String feignRequestHeaderNameHostPort = "ReqHostPort";
 
-    private Map<String, String> headers;
+    private Map<String, Collection<String>> headers;
 
     public FeignRequestHeader(String appName, String ip, String port, String hostName) {
         appName = appName == null ? "" : appName;
-        ip = ip == null ? "" : ip;
-        port = port == null ? "" : port;
-        hostName = hostName == null ? "" : hostName;
+        Collection<String> appNames = new HashSet<>();
+        appNames.add(appName);
         //
-        Map<String, String> temp = new HashMap<>();
-        temp.put(feignRequestHeaderNameApplicationName, appName);
-        temp.put(feignRequestHeaderNameHostIP, ip);
-        temp.put(feignRequestHeaderNameHostPort, port);
-        temp.put(feignRequestHeaderNameHostName, hostName);
+        ip = ip == null ? "" : ip;
+        Collection<String> ips = new HashSet<>();
+        ips.add(ip);
+        //
+        port = port == null ? "" : port;
+        Collection<String> ports = new HashSet<>();
+        ports.add(port);
+
+        //
+        hostName = hostName == null ? "" : hostName;
+        Collection<String> hostNames = new HashSet<>();
+        hostNames.add(hostName);
+        //
+        Map<String, Collection<String>> temp = new HashMap<>();
+        temp.put(feignRequestHeaderNameApplicationName, appNames);
+        temp.put(feignRequestHeaderNameHostIP, ips);
+        temp.put(feignRequestHeaderNameHostPort, ports);
+        temp.put(feignRequestHeaderNameHostName, hostNames);
         this.headers = Collections.unmodifiableMap(temp);
     }
 
-    public Map<String, String> getHeaders() {
+    public Map<String, Collection<String>> getHeaders() {
         return this.headers;
     }
 

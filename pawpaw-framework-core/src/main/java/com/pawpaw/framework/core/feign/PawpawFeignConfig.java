@@ -3,8 +3,8 @@ package com.pawpaw.framework.core.feign;
 import com.netflix.appinfo.EurekaInstanceConfig;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;
 import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
+import feign.RequestInterceptor;
 import feign.codec.Decoder;
-import feign.codec.Encoder;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -26,16 +26,15 @@ public class PawpawFeignConfig {
         return new RemoteResultFeignDeocder(messageConverters, objectMapper, "utf-8");
     }
 
-    @Primary
+
     @Bean
-    @Autowired
-    public Encoder getEncoder(EurekaInstanceConfig eurekaInstanceConfig) {
+    public RequestInterceptor getHeaderInteceptor(EurekaInstanceConfig eurekaInstanceConfig) {
         String ip = eurekaInstanceConfig.getIpAddress();
         int port = eurekaInstanceConfig.getNonSecurePort();
         String hostName = eurekaInstanceConfig.getHostName(true);
         String appName = eurekaInstanceConfig.getAppname();
         FeignRequestHeader requestHeader = new FeignRequestHeader(appName, ip, String.valueOf(port), hostName);
-        return new DefaultPawpawFeignEncoder(this.messageConverters, requestHeader.getHeaders());
+        return new AddHeaderInterceptor(requestHeader.getHeaders());
     }
 
 
