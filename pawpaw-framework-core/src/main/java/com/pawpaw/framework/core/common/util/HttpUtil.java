@@ -306,7 +306,7 @@ public class HttpUtil {
      *
      * @author liujixin
      */
-    public interface HttpCallBack {
+    public static interface HttpCallBack {
 
         public void beforeHttp(HttpClient client, HttpRequestBase httpMethod, HttpEntity reqEntity) throws Exception;
 
@@ -325,7 +325,7 @@ public class HttpUtil {
         }
     }
 
-    public class ChangeHeaderCallBack implements HttpCallBack {
+    public static  class ChangeHeaderCallBack implements HttpCallBack {
         Map<String, String> headers;
 
         public ChangeHeaderCallBack(Map<String, String> headers) {
