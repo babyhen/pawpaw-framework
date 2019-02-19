@@ -21,7 +21,7 @@ public class SHAUtil {
         }
     }
 
-    private static String encrytSHA256(String content, String secret) {
+    public static String encrytSHA256(String content, String secret) {
         try {
             Security.addProvider(new BouncyCastleProvider());
             SecretKey secretKey = new SecretKeySpec(secret.getBytes("UTF8"),

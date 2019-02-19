@@ -324,4 +324,27 @@ public class HttpUtil {
             logger.error("发送http请求失败，{}，{}", e.getMessage());
         }
     }
+
+    public class ChangeHeaderCallBack implements HttpCallBack {
+        Map<String, String> headers;
+
+        public ChangeHeaderCallBack(Map<String, String> headers) {
+            this.headers = headers;
+        }
+
+
+        @Override
+        public void beforeHttp(HttpClient client, HttpRequestBase httpMethod, HttpEntity reqEntity) throws Exception {
+            if (this.headers != null) {
+                headers.keySet().forEach(key -> {
+                    httpMethod.setHeader(key, headers.get(key));
+                });
+            }
+        }
+
+        @Override
+        public void afterHttp(HttpClient client, HttpResponse response, String respData) throws Exception {
+            //noop
+        }
+    }
 }
