@@ -186,10 +186,10 @@ public class HttpUtil {
                 callBack.afterHttp(client, response, resp);
             }
             int status = response.getStatusLine().getStatusCode();
-            logger.debug("http resp status is {}", status);
+            logger.debug("http resp status is {},data is {}", status, resp);
             if (status != HttpStatus.SC_OK) {
-                logger.warn("http resp status is {}", status);
-                throw new RuntimeException("http请求status异常,status=" + status);
+                logger.warn("http resp status is {},data is {}", status, resp);
+                throw new RuntimeException("http请求status异常,status=" + status + ",数据=" + resp);
             }
             return resp;
         } catch (Exception e) {
@@ -250,10 +250,10 @@ public class HttpUtil {
                 callBack.afterHttp(client, response, resp);
             }
             int status = response.getStatusLine().getStatusCode();
-            logger.debug("http resp status is {}", status);
+            logger.debug("http resp status is {},data is {}", status, resp);
             if (status != HttpStatus.SC_OK) {
-                logger.warn("http resp status is {}", status);
-                throw new RuntimeException("http请求status异常,status=" + status);
+                logger.warn("http resp status is {},data is {}", status, resp);
+                throw new RuntimeException("http请求status异常,status=" + status + ",数据=" + resp);
             }
             return resp;
         } catch (Exception e) {
@@ -325,7 +325,7 @@ public class HttpUtil {
         }
     }
 
-    public static  class ChangeHeaderCallBack implements HttpCallBack {
+    public static class ChangeHeaderCallBack implements HttpCallBack {
         Map<String, String> headers;
 
         public ChangeHeaderCallBack(Map<String, String> headers) {
