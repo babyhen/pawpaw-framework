@@ -225,7 +225,7 @@ public class HttpUtil {
      * @throws Exception
      */
     public static String get(String url, Map<String, String> params, HttpCallBack callBack) {
-        logger.info("http url is {}", url);
+        logger.debug("http url is {}", url);
         if (params != null) {
             List<NameValuePair> paramItem = new ArrayList<>();
             for (Entry<String, String> entry : params.entrySet()) {
@@ -236,7 +236,7 @@ public class HttpUtil {
                 url += "?";
             }
             url += paramStr;
-            logger.info("processed http url is {}", url);
+            logger.debug("processed http url is {}", url);
         }
         HttpGet get = new HttpGet(url);
         try {
@@ -245,7 +245,7 @@ public class HttpUtil {
             }
             HttpResponse response = client.execute(get);
             String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-            logger.info(resp);
+            logger.debug(resp);
             if (callBack != null) {
                 callBack.afterHttp(client, response, resp);
             }
@@ -281,7 +281,7 @@ public class HttpUtil {
             HttpResponse response = client.execute(post);
 
             int status = response.getStatusLine().getStatusCode();
-            logger.info("http resp status is {}", status);
+            logger.debug("http resp status is {}", status);
             if (checkStatus) {
                 if (status != HttpStatus.SC_OK) {
                     throw new Exception("http resp code is not SC_OK");
