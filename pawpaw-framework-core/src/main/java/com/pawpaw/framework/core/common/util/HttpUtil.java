@@ -65,15 +65,14 @@ public class HttpUtil {
 
             HttpResponse response = client.execute(post);
             String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-            logger.debug(resp);
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {},data is {}", status, resp);
             if (callBack != null) {
                 callBack.afterHttp(client, response, resp);
             }
-            int status = response.getStatusLine().getStatusCode();
-            logger.debug("http resp status is {}", status);
             if (status != HttpStatus.SC_OK) {
-                logger.warn("http resp status is {}", status);
-                throw new RuntimeException("http请求status异常,status=" + status);
+                logger.debug("http resp status is {},data is {}", status, resp);
+                throw new RuntimeException("http请求status异常,状态=" + status + ",数据=" + resp);
             }
             return resp;
         } catch (Exception e) {
@@ -128,15 +127,15 @@ public class HttpUtil {
 
             HttpResponse response = client.execute(post);
             String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-            logger.debug(resp);
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {},data is {}", status, resp);
             if (callBack != null) {
                 callBack.afterHttp(client, response, resp);
             }
-            int status = response.getStatusLine().getStatusCode();
-            logger.debug("http resp status is {}", status);
+
             if (status != HttpStatus.SC_OK) {
-                logger.warn("http resp status is {}", status);
-                throw new RuntimeException("http请求status异常,status=" + status);
+                logger.error("http resp status is {},data is {}", status, resp);
+                throw new RuntimeException("http请求status异常,状态=" + status + ",数据=" + resp);
             }
             return resp;
         } catch (Exception e) {
@@ -181,15 +180,15 @@ public class HttpUtil {
 
             HttpResponse response = client.execute(post);
             String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-            logger.debug(resp);
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {},data is {}", status, resp);
             if (callBack != null) {
                 callBack.afterHttp(client, response, resp);
             }
-            int status = response.getStatusLine().getStatusCode();
-            logger.debug("http resp status is {},data is {}", status, resp);
+
             if (status != HttpStatus.SC_OK) {
-                logger.warn("http resp status is {},data is {}", status, resp);
-                throw new RuntimeException("http请求status异常,status=" + status + ",数据=" + resp);
+                logger.error("http resp status is {},data is {}", status, resp);
+                throw new RuntimeException("http请求status异常,状态=" + status + ",数据=" + resp);
             }
             return resp;
         } catch (Exception e) {
@@ -245,15 +244,15 @@ public class HttpUtil {
             }
             HttpResponse response = client.execute(get);
             String resp = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-            logger.debug(resp);
+            int status = response.getStatusLine().getStatusCode();
+            logger.debug("http resp status is {},data is {}", status, resp);
             if (callBack != null) {
                 callBack.afterHttp(client, response, resp);
             }
-            int status = response.getStatusLine().getStatusCode();
-            logger.debug("http resp status is {},data is {}", status, resp);
+
             if (status != HttpStatus.SC_OK) {
-                logger.warn("http resp status is {},data is {}", status, resp);
-                throw new RuntimeException("http请求status异常,status=" + status + ",数据=" + resp);
+                logger.error("http resp status is {},data is {}", status, resp);
+                throw new RuntimeException("http请求status异常,状态=" + status + ",数据=" + resp);
             }
             return resp;
         } catch (Exception e) {
