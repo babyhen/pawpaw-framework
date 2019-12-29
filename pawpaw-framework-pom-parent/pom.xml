@@ -23,7 +23,7 @@
         <!-- 需要和上面引用的parent的version一致 -->
         <spring.boot.starter.default.version>2.0.4.RELEASE</spring.boot.starter.default.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.cloud.starter.default.version>2.0.1.RELEASE</spring.cloud.starter.default.version>
+        <spring.cloud.starter.default.version>2.2.1.RELEASE</spring.cloud.starter.default.version>
     </properties>
 
     <dependencies>
