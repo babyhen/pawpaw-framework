@@ -15,10 +15,10 @@
 
 
     <modules>
+        <module>pawpaw-framework-pom-parent</module>
         <module>pawpaw-framework-contract</module>
         <module>pawpaw-framework-core</module>
-        <module>pawpaw-pom-parent</module>
-        <module>pawpaw-common</module>
+        <module>pawpaw-framework-common</module>
 
     </modules>
 
