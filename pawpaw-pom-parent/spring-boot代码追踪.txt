@@ -1,0 +1,14 @@
+SpringApplicationListener---> EventPublishingRunListener
+ApplicationListener---->
+ApplicationContextInitializer  -》 创建applicationContext之后后置初始化
+ConditionEvaluator  -》 判断beanreader是否应该跳过该beandefine
+BeanDefinitionCustomizer-》 供用户自定义beanDefinition。类似于beanfactorypostprocessor对beanfactory后置处理，这里是对beandefination后置处理
+
+BeanFactoryPostProcessor  -》 beanFactory后置处理器，后置修改beanFactory里面的信息，例如beanDefination。 但是不会修改bean的实例
+BeanPostProcessor -> autowirePostProcessor
+
+StandardServletEnvironment
+
+PropertySource -- 实现类：  environment   system  command line
+PrpertyResolver
+
