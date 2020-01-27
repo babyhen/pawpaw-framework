@@ -9,11 +9,13 @@ import feign.codec.Decoder;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
+@EnableFeignClients
 public class PawpawFeignConfig {
     @Autowired
     private ObjectFactory<HttpMessageConverters> messageConverters;
