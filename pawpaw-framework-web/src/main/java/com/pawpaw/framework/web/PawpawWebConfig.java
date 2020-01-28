@@ -34,7 +34,6 @@ public class PawpawWebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new PrintRequestDataInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new ThreadHandlerMapInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(new UrlCalledCounterInterceptor()).addPathPatterns("/**");
-        registry.addInterceptor(new PrintFeignClientHeaderInterceptor()).addPathPatterns("/**");
     }
 
     @Override

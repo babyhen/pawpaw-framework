@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.feign;
+package com.pawpaw.framework.cloud.feign;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

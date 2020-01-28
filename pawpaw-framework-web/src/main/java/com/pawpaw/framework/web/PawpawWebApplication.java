@@ -1,6 +1,6 @@
 package com.pawpaw.framework.web;
+
 import com.pawpaw.framework.core.PawpawAbstractApplication;
-import com.pawpaw.framework.core.web.PawpawWebConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;

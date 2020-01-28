@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.feign;
+package com.pawpaw.framework.cloud.feign;
 
 import com.netflix.appinfo.EurekaInstanceConfig;
 import com.pawpaw.framework.core.codec.ResultDeocder;

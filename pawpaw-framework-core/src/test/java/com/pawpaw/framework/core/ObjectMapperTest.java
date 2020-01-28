@@ -1,4 +1,4 @@
-package com.pawpaw.framework.test;
+package com.pawpaw.framework.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pawpaw.framework.core.factory.json.ObjectMapperFactory;

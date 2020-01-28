@@ -2,7 +2,6 @@ package com.pawpaw.framework.core.codec;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
-import feign.codec.DecodeException;
 
 import java.io.IOException;
 
@@ -23,7 +22,7 @@ public class ResultDeocder {
         RemoteResult<Object> o = this.objectMapper.readValue(rawData, new TypeReference<RemoteResult<Object>>() {
         });
         if (o == null) {
-            throw new DecodeException("响应结果不能转换成RemoteResult类型");
+            throw new DecodeErrorException("响应结果不能转换成RemoteResult类型");
         }
         if (!o.isSucc()) {
             StringBuilder sb = new StringBuilder();

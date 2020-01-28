@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.swagger;
+package com.pawpaw.framework.cloud.swagger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;

@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.feign;
+package com.pawpaw.framework.cloud.feign;
 
 import com.pawpaw.framework.core.codec.ResultDeocder;
 import com.pawpaw.framework.core.common.util.PawpawFrameworkUtil;
