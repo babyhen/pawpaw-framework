@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.web.controller.vo;
+package com.pawpaw.framework.web.controller.vo;
 
 import lombok.*;
 

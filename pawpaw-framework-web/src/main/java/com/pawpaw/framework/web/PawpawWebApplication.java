@@ -1,18 +1,9 @@
-package com.pawpaw.framework.core;
-
-import com.pawpaw.framework.core.feign.PawpawFeignConfig;
+package com.pawpaw.framework.web;
+import com.pawpaw.framework.core.PawpawAbstractApplication;
 import com.pawpaw.framework.core.web.PawpawWebConfig;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.cloud.CloudAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.core.io.support.SpringFactoriesLoader;
-
-import java.util.Properties;
 
 public class PawpawWebApplication extends PawpawAbstractApplication {
 

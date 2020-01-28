@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.web;
+package com.pawpaw.framework.web;
 
 
 import com.pawpaw.framework.core.codec.RemoteResult;

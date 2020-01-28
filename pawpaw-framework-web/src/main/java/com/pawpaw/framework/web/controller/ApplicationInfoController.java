@@ -1,6 +1,6 @@
-package com.pawpaw.framework.core.web.controller;
+package com.pawpaw.framework.web.controller;
 
-import com.pawpaw.framework.core.web.controller.vo.ApplicationInfoStatisticVo;
+import com.pawpaw.framework.web.controller.vo.ApplicationInfoStatisticVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.web.interceptor;
+package com.pawpaw.framework.web.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
