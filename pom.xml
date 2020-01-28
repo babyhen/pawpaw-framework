@@ -20,7 +20,7 @@
         <module>pawpaw-framework-core</module>
         <module>pawpaw-framework-web</module>
         <module>pawpaw-framework-cloud</module>
-        <module>pawpaw-framework-common</module>
+
 
     </modules>
 
