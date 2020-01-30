@@ -23,7 +23,17 @@ public class TimeUtilTest {
         System.out.println(time);
     }
 
+    @Test
+    public void midnightTime() throws JsonProcessingException {
+        Date time = TimeUtil.midnightTime(new Date());
+        System.out.println(time);
+    }
 
+    @Test
+    public void lastTimeOfDay() throws JsonProcessingException {
+        Date time = TimeUtil.lastTimeOfDay(new Date());
+        System.out.println(time);
+    }
 }
 
 

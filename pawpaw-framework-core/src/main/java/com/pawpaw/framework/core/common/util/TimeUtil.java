@@ -3,6 +3,8 @@ package com.pawpaw.framework.core.common.util;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
 
 public class TimeUtil {
@@ -113,6 +115,22 @@ public class TimeUtil {
 
     public static boolean beforeOrEqual(Date t1, Date t2) {
         return t1.before(t2) || t1.equals(t2);
+
+    }
+
+    public static Date midnightTime(Date time) {
+        LocalDateTime ldt = toLocalDateTime(time);
+        ldt = ldt.truncatedTo(ChronoUnit.DAYS);
+        return toDate(ldt);
+    }
+
+
+    public static Date lastTimeOfDay(Date time) {
+        LocalDateTime ldt = toLocalDateTime(time);
+        ldt = ldt.truncatedTo(ChronoUnit.DAYS);
+        ldt = ldt.plusDays(1);
+        ldt = ldt.minusSeconds(1);
+        return toDate(ldt);
 
     }
 }
