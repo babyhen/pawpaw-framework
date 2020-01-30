@@ -53,17 +53,30 @@ public class TimeUtil {
         return format(time, TIME_FORMAT_8);
     }
 
+
+    public static LocalDateTime toLocalDateTime(Date time) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(time.toInstant(), ZoneId.systemDefault());
+        return localDateTime;
+    }
+
+    public static Date toDate(LocalDateTime localDateTime) {
+        ZonedDateTime zdt = localDateTime.atZone(ZoneOffset.systemDefault());
+        return Date.from(zdt.toInstant());
+    }
+
+    public static Date toDate(LocalDate localDate) {
+        LocalDateTime dt = LocalDateTime.of(localDate, LocalTime.MIN);
+        return toDate(dt);
+    }
+
     public static Date parse(String str, DateTimeFormatter format) {
         //包含时间
         if (str.contains("H") || str.contains("m") || str.contains("s")) {
             LocalDateTime dt = LocalDateTime.from(format.parse(str));
-            ZonedDateTime zdt = dt.atZone(ZoneOffset.systemDefault());
-            return Date.from(zdt.toInstant());
+            return toDate(dt);
         } else {
             LocalDate ld = LocalDate.parse(str, format);
-            LocalDateTime dt = LocalDateTime.of(ld,LocalTime.MIN);
-            ZonedDateTime zdt = dt.atZone(ZoneOffset.systemDefault());
-            return Date.from(zdt.toInstant());
+            return toDate(ld);
         }
 
     }
@@ -87,5 +100,9 @@ public class TimeUtil {
         return minus(time, mill);
     }
 
-
+    public static Date minusYear(Date time, int year) {
+        LocalDateTime localDateTime = toLocalDateTime(time);
+        localDateTime = localDateTime.minusYears(year);
+        return toDate(localDateTime);
+    }
 }
