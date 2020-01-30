@@ -105,4 +105,14 @@ public class TimeUtil {
         localDateTime = localDateTime.minusYears(year);
         return toDate(localDateTime);
     }
+
+    public static boolean afterOrEqual(Date t1, Date t2) {
+        return t1.after(t2) || t1.equals(t2);
+
+    }
+
+    public static boolean beforeOrEqual(Date t1, Date t2) {
+        return t1.before(t2) || t1.equals(t2);
+
+    }
 }
