@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import static com.pawpaw.framework.core.common.util.TimeUtil.TIME_FORMAT_19;
 import static com.pawpaw.framework.core.common.util.TimeUtil.TIME_FORMAT_8;
 
 public class TimeUtilTest {
@@ -13,7 +14,7 @@ public class TimeUtilTest {
 
     @Test
     public void parse() throws JsonProcessingException {
-        Date time = TimeUtil.parse("20200128", TIME_FORMAT_8);
+        Date time = TimeUtil.parseDateTime("2020-01-20 10:11:12", TIME_FORMAT_19);
         System.out.println(time);
     }
 

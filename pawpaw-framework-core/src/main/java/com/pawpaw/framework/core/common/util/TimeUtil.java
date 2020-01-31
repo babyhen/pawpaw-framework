@@ -71,17 +71,20 @@ public class TimeUtil {
         return toDate(dt);
     }
 
-    public static Date parse(String str, DateTimeFormatter format) {
-        //包含时间
-        if (str.contains("H") || str.contains("m") || str.contains("s")) {
-            LocalDateTime dt = LocalDateTime.from(format.parse(str));
-            return toDate(dt);
-        } else {
-            LocalDate ld = LocalDate.parse(str, format);
-            return toDate(ld);
-        }
+    public static Date parseDateTime(String str, DateTimeFormatter format) {
+        LocalDateTime dt = LocalDateTime.from(format.parse(str));
+        return toDate(dt);
 
     }
+
+    public static Date parseDate(String str, DateTimeFormatter format) {
+
+        LocalDate ld = LocalDate.parse(str, format);
+        return toDate(ld);
+
+
+    }
+
 
     public static Date plus(Date time, long millions) {
         long t = time.getTime() + millions;
