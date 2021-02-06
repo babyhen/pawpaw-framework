@@ -1,7 +1,6 @@
-package com.pawpaw.framework.core;
+package com.pawpaw.framework.quickstart;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
+import com.pawpaw.framework.core.PawpawAbstractApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
@@ -12,9 +11,7 @@ public class PawpawQuickStartApplication extends PawpawAbstractApplication {
     public ConfigurableApplicationContext run(Class[] sources, String[] args) {
         SpringApplicationBuilder builder = new SpringApplicationBuilder();
         builder.sources(sources);
-        SpringApplication springApplication = builder.build();
-        springApplication.setWebApplicationType(WebApplicationType.NONE);
-        return springApplication.run(args);
+        return builder.run(args);
     }
 
 

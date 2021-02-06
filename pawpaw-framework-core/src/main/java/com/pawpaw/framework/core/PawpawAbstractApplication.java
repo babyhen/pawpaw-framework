@@ -5,6 +5,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 public abstract class PawpawAbstractApplication {
 
+    public ConfigurableApplicationContext run() {
+        return this.run(new Class[0]);
+
+    }
 
     public ConfigurableApplicationContext run(Class... sources) {
         return this.run(sources, new String[0]);
