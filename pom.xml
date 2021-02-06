@@ -244,7 +244,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.12</version>
+                <version>8.0.16</version>
             </dependency>
 
             <!-- redisson是个丰富的redis应用框架，有分布式锁，丰富的数据操作 --><!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter -->
