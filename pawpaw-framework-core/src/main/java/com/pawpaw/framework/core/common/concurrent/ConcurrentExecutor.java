@@ -39,7 +39,7 @@ public class ConcurrentExecutor {
      * @param timeOut in millionseconds
      *                timeout in millions the main thread blocks.
      */
-    public <V> ConcurrentExecuteResult<V> execute(Collection<ConcurrentCall<V>> calls, long timeOut) {
+    public <V> ConcurrentExecuteResult<V> execute(Collection<? extends ConcurrentCall<V>> calls, long timeOut) {
         logger.debug("开始多线程任务，子任务数量:{},time out is {}", calls.size(), timeOut);
         if (timeOut < 0) {
             throw new IllegalArgumentException("time out must greate or equals than zero");
@@ -80,7 +80,7 @@ public class ConcurrentExecutor {
 
     }
 
-    public <V> ConcurrentExecuteResult<V> executeBatch(Collection<ConcurrentCall<V>> calls, int batchSize) {
+    public <V> ConcurrentExecuteResult<V> executeBatch(Collection<? extends ConcurrentCall<V>> calls, int batchSize) {
         return executeBatch(calls, batchSize, 0L);
     }
 
@@ -92,15 +92,15 @@ public class ConcurrentExecutor {
      * @param batchSize
      * @return results
      */
-    public <V> ConcurrentExecuteResult<V> executeBatch(Collection<ConcurrentCall<V>> calls, int batchSize,
+    public <V> ConcurrentExecuteResult<V> executeBatch(Collection<? extends ConcurrentCall<V>> calls, int batchSize,
                                                        long timeOut) {
         logger.debug("begin concurrent calls，all size:{},batch size:{}", calls.size(), batchSize);
         if (calls == null || calls.size() == 0) {
             return new ConcurrentExecuteResult<V>(calls.size());
         }
         ConcurrentExecuteResult<V> finalResult = new ConcurrentExecuteResult<>(calls.size());
-        List<List<ConcurrentCall<V>>> deviceCalls = CollectionConventer.devide(calls, batchSize);
-        for (List<ConcurrentCall<V>> batch : deviceCalls) {
+        List<List<? extends ConcurrentCall<V>>> deviceCalls = CollectionConventer.devide(calls, batchSize);
+        for (List<? extends ConcurrentCall<V>> batch : deviceCalls) {
             ConcurrentExecuteResult<V> batchResult = execute(batch, timeOut);
             finalResult.merge(batchResult);
         }
