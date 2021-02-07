@@ -27,7 +27,7 @@ public class ConcurrentExecutor {
         this.executor = executor;
     }
 
-    public <V> ConcurrentExecuteResult<V> execute(Collection<ConcurrentCall<V>> calls) {
+    public <V> ConcurrentExecuteResult<V> execute(Collection<? extends ConcurrentCall<V>> calls) {
         return execute(calls, 0L);
 
     }
