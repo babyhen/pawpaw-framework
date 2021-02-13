@@ -34,12 +34,14 @@ public class RestTemplateUtil {
 
     }
 
-    public static String buildRestTemplateUrl(String host, String path, Collection<String> paraNames) {
+    public static String buildRestTemplateUrl(String hostPort, String path, Collection<String> paraNames) {
+        return buildRestTemplateUrl("http", hostPort, path, paraNames);
+    }
+
+    public static String buildRestTemplateUrl(String schema, String hostPort, String path, Collection<String> paraNames) {
         StringBuilder url = new StringBuilder();
-        if (org.apache.commons.lang3.StringUtils.endsWith(host, "/")) {
-            host = org.apache.commons.lang3.StringUtils.substringBeforeLast(host, "/");
-        }
-        url.append(host);
+        url.append(schema).append("://");
+        url.append(hostPort);
         if (org.apache.commons.lang3.StringUtils.startsWith(path, "/")) {
             url.append(path);
         } else {
