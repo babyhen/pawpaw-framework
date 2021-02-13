@@ -35,17 +35,6 @@ public class RestTemplateUtil {
 
     }
 
-    public static String buildRestTemplateUrl(URL url, Collection<String> paraNames) {
-        String schema = url.getProtocol();
-        String host = url.getHost();
-        int port = url.getPort();
-        String path = url.getPath();
-        String queryParam = url.getQuery();
-        StringBuilder sb = new StringBuilder();
-        sb.append(path).append("?").append(queryParam);
-        return buildRestTemplateUrl(schema, host, port, sb.toString(), paraNames);
-
-    }
 
     public static String buildRestTemplateUrl(String host, int port, String path, Collection<String> paraNames) {
         if (port == 80) {
@@ -72,34 +61,8 @@ public class RestTemplateUtil {
         } else {
             url.append("/").append(path);
         }
-        return appendRestTemplateUrlParam(url.toString(), paraNames);
+        return appendParam(url.toString(), paraNames);
     }
 
-    public static String appendRestTemplateUrlParam(String rawUrl, Collection<String> paraNames) {
-        if (paraNames == null || paraNames.isEmpty()) {
-            return rawUrl;
-        } else {
-            StringBuilder url = new StringBuilder(rawUrl);
-            if (StringUtils.contains(rawUrl, "?")) {
-                //有问号，可能是在最后，也可能是带参数的url。
-                // 例如 :  http://abc.com/x? 和   http://abc.com/x?a=1&b=2
-                if (!StringUtils.endsWith(rawUrl, "?")) {
-                    url.append("&");
-                }
-            } else {
-                url.append("?");
-            }
-            for (String key : paraNames) {
-                url.append(key).append("=").append("{").append(key).append("}");
-                url.append("&");
-            }
-            String s = url.toString();
-            if (StringUtils.endsWith(s, "&")) {
-                s = StringUtils.substringBeforeLast(s, "&");
-            }
-            return s;
-        }
-
-    }
 
 }

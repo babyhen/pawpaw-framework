@@ -26,6 +26,10 @@ public class RestTemplateUtilTest {
         p.add("c");
         String url = RestTemplateUtil.appendParam(s, p);
         System.out.println(url);
+        url = RestTemplateUtil.buildRestTemplateUrl("abc.com", 443, "xxx?", p);
+        System.out.println(url);
+        url = RestTemplateUtil.buildRestTemplateUrl("http","abc.com", 80, "xxx?", p);
+        System.out.println(url);
     }
 }
 
