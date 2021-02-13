@@ -54,9 +54,12 @@ public class RestTemplateUtil {
     }
 
     public static String buildRestTemplateUrl(String schemaHostPort, String path, Collection<String> paraNames) {
+        if(StringUtils.endsWith(schemaHostPort,"/")){
+            schemaHostPort=StringUtils.substringBeforeLast(schemaHostPort,"/");
+        }
         StringBuilder url = new StringBuilder();
         url.append(schemaHostPort);
-        if (org.apache.commons.lang3.StringUtils.startsWith(path, "/")) {
+        if (StringUtils.startsWith(path, "/")) {
             url.append(path);
         } else {
             url.append("/").append(path);
