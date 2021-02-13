@@ -6,6 +6,8 @@ import com.pawpaw.framework.core.common.util.TimeUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +19,7 @@ public class RestTemplateUtilTest {
 
     @Test
     public void test() throws JsonProcessingException {
-        String s = "http://abc.com/xxx?x=1";
+        String s = "http://abc.com/xxx?";
         List<String> p = new LinkedList<>();
         p.add("a");
         p.add("b");

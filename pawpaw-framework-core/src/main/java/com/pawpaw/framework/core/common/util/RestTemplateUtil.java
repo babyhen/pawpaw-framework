@@ -2,6 +2,7 @@ package com.pawpaw.framework.core.common.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.net.URL;
 import java.util.Collection;
 
 public class RestTemplateUtil {
@@ -34,23 +35,60 @@ public class RestTemplateUtil {
 
     }
 
-    public static String buildRestTemplateUrl(String hostPort, String path, Collection<String> paraNames) {
-        return buildRestTemplateUrl("http", hostPort, path, paraNames);
+    public static String buildRestTemplateUrl(URL url, Collection<String> paraNames) {
+        String schema = url.getProtocol();
+        String host = url.getHost();
+        int port = url.getPort();
+        String path = url.getPath();
+        String queryParam = url.getQuery();
+        StringBuilder sb = new StringBuilder();
+        sb.append(path).append("?").append(queryParam);
+        return buildRestTemplateUrl(schema, host, port, sb.toString(), paraNames);
+
     }
 
-    public static String buildRestTemplateUrl(String schema, String hostPort, String path, Collection<String> paraNames) {
+    public static String buildRestTemplateUrl(String host, int port, String path, Collection<String> paraNames) {
+        if (port == 80) {
+            return buildRestTemplateUrl("http", host, port, path, paraNames);
+        }
+        if (port == 443) {
+            return buildRestTemplateUrl("https", host, port, path, paraNames);
+        }
+        throw new RuntimeException("无法猜测到schema");
+    }
+
+    public static String buildRestTemplateUrl(String schema, String host, int port, String path, Collection<String> paraNames) {
+        StringBuilder schemaHostPort = new StringBuilder();
+        schemaHostPort.append(schema).append("://");
+        schemaHostPort.append(host).append(":").append(port);
+        return buildRestTemplateUrl(schemaHostPort.toString(), path, paraNames);
+    }
+
+    public static String buildRestTemplateUrl(String schemaHostPort, String path, Collection<String> paraNames) {
         StringBuilder url = new StringBuilder();
-        url.append(schema).append("://");
-        url.append(hostPort);
+        url.append(schemaHostPort);
         if (org.apache.commons.lang3.StringUtils.startsWith(path, "/")) {
             url.append(path);
         } else {
             url.append("/").append(path);
         }
+        return appendRestTemplateUrlParam(url.toString(), paraNames);
+    }
+
+    public static String appendRestTemplateUrlParam(String rawUrl, Collection<String> paraNames) {
         if (paraNames == null || paraNames.isEmpty()) {
-            return url.toString();
+            return rawUrl;
         } else {
-            url.append("?");
+            StringBuilder url = new StringBuilder(rawUrl);
+            if (StringUtils.contains(rawUrl, "?")) {
+                //有问号，可能是在最后，也可能是带参数的url。
+                // 例如 :  http://abc.com/x? 和   http://abc.com/x?a=1&b=2
+                if (!StringUtils.endsWith(rawUrl, "?")) {
+                    url.append("&");
+                }
+            } else {
+                url.append("?");
+            }
             for (String key : paraNames) {
                 url.append(key).append("=").append("{").append(key).append("}");
                 url.append("&");
