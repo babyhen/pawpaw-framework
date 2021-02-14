@@ -9,9 +9,9 @@ import java.util.Date;
 
 public class TimeUtil {
 
-    public static DateTimeFormatter TIME_FORMAT_YEAR_MONTH = new DateTimeFormatterBuilder().appendPattern("yyyyMM")
-            .toFormatter();
 
+    public static DateTimeFormatter HOUR_MINUTE = new DateTimeFormatterBuilder().appendPattern("HH时mm分")
+            .toFormatter();
     public static DateTimeFormatter TIME_FORMAT_8 = new DateTimeFormatterBuilder().appendPattern("yyyyMMdd")
             .toFormatter();
     public static DateTimeFormatter TIME_FORMAT_10 = new DateTimeFormatterBuilder().appendPattern("yyyy-MM-dd")
