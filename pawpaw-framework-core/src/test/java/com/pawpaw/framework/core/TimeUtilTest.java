@@ -22,6 +22,8 @@ public class TimeUtilTest {
     public void format() throws JsonProcessingException {
         String hourAndMinute = TimeUtil.format(new Date(), HOUR_MINUTE);
         System.out.println(hourAndMinute);
+        String dayHourMinute = TimeUtil.format(new Date(), DAY_HOUR_MINUTE);
+        System.out.println(dayHourMinute);
     }
 
     @Test
