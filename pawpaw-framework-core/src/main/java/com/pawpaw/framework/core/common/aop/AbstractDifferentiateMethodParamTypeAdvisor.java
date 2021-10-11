@@ -1,6 +1,6 @@
 package com.pawpaw.framework.core.common.aop;
 
-import com.pawpaw.framework.core.common.util.AssertUtil;
+import com.pawpaw.common.util.AssertUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.slf4j.Logger;

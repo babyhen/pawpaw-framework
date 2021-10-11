@@ -37,7 +37,7 @@ public class PawpawObjectMapper {
         return this.om.writeValueAsString(value);
     }
 
-    public <T> T readValue(String content, TypeReference valueTypeRef) throws IOException {
+    public <T> T readValue(String content, TypeReference<T> valueTypeRef) throws IOException {
         return this.om.readValue(content, valueTypeRef);
     }
 

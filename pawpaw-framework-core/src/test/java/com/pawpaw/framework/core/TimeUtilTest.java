@@ -1,12 +1,14 @@
 package com.pawpaw.framework.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pawpaw.framework.core.common.util.TimeUtil;
+import com.pawpaw.common.util.TimeUtil;
 import org.junit.Test;
 
 import java.util.Date;
 
-import static com.pawpaw.framework.core.common.util.TimeUtil.*;
+import static com.pawpaw.common.util.DateTimeUtil.TIME_FORMAT_19;
+import static com.pawpaw.common.util.TimeUtil.DAY_HOUR_MINUTE;
+import static com.pawpaw.common.util.TimeUtil.HOUR_MINUTE;
 
 public class TimeUtilTest {
 

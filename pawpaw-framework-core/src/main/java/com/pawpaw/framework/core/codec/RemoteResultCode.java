@@ -1,7 +1,7 @@
 package com.pawpaw.framework.core.codec;
 
 
-import com.pawpaw.framework.core.common.IEnumType;
+import com.pawpaw.common.domain.IEnumType;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,7 +25,7 @@ public enum RemoteResultCode implements IEnumType {
         return this.value;
     }
 
-    @Override
+
     public Collection<? extends IEnumType> allValues() {
         RemoteResultCode[] arr = RemoteResultCode.values();
         return Arrays.asList(arr);

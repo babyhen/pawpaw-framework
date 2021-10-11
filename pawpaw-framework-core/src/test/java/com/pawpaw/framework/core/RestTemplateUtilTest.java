@@ -1,18 +1,11 @@
 package com.pawpaw.framework.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pawpaw.framework.core.common.util.RestTemplateUtil;
-import com.pawpaw.framework.core.common.util.TimeUtil;
-import org.junit.Assert;
+import com.pawpaw.common.util.RestTemplateUtil;
 import org.junit.Test;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.pawpaw.framework.core.common.util.TimeUtil.TIME_FORMAT_19;
 
 public class RestTemplateUtilTest {
 

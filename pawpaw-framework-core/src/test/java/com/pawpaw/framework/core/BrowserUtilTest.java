@@ -1,7 +1,7 @@
 package com.pawpaw.framework.core;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.pawpaw.framework.core.common.util.BrowserUtil;
+import com.pawpaw.common.util.BrowserUtil;
 import org.junit.Test;
 
 public class BrowserUtilTest {
