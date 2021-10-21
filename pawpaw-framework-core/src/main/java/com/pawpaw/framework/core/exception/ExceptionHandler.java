@@ -24,7 +24,7 @@ public class ExceptionHandler {
         this.listeners.add(listener);
     }
 
-    public void broadcastException(Exception e) {
+    public void broadcastException(ExpObject e) {
         for (ExceptionListener listener : listeners) {
             listener.onException(e);
         }
@@ -34,10 +34,3 @@ public class ExceptionHandler {
 }
 
 
-class ConsolePrintExceptionListener implements ExceptionListener {
-
-    @Override
-    public void onException(Exception e) {
-        System.out.println(e);
-    }
-}
