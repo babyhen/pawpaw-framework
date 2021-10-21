@@ -14,9 +14,18 @@ public class FileEventListener implements IEventListener {
     private final File fileDir;
 
     public FileEventListener(String fileDir) {
-        this.fileDir = new File(fileDir);
+        File file = new File(fileDir);
+        if (!file.isDirectory()) {
+            throw new RuntimeException(fileDir + "不是一个有效目录");
+        }
+        this.fileDir = file;
     }
 
+
+    @Override
+    public boolean canHandle(IEvent event) {
+        return true;
+    }
 
     @Override
     public void onEvent(IEvent event) {

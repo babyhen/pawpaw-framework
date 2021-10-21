@@ -32,8 +32,18 @@ public class EventBroadcaster {
     }
 
     public void broadcastEvent(IEvent event) {
+        boolean handled = false;
         for (IEventListener listener : this.listeners) {
-            listener.onEvent(event);
+            boolean canHandle = listener.canHandle(event);
+            if (canHandle) {
+                listener.onEvent(event);
+                handled = true;
+            }
+
+        }
+        //没有能够处理的，默认打印到控制台
+        if (!handled && event != null) {
+            System.out.println("没有listener可以处理此event:" + event.desc());
         }
     }
 }

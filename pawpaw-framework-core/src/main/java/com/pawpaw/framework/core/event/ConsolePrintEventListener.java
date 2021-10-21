@@ -11,6 +11,11 @@ import java.util.Date;
 public class ConsolePrintEventListener implements IEventListener {
 
     @Override
+    public boolean canHandle(IEvent event) {
+        return true;
+    }
+
+    @Override
     public void onEvent(IEvent event) {
         System.out.println(event.desc());
     }
