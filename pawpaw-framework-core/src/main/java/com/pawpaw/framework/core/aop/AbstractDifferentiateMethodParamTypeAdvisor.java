@@ -1,4 +1,4 @@
-package com.pawpaw.framework.core.common.aop;
+package com.pawpaw.framework.core.aop;
 
 import com.pawpaw.common.util.AssertUtil;
 import org.apache.commons.lang3.StringUtils;
