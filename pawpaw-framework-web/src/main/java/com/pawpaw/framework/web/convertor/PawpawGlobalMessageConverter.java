@@ -2,9 +2,9 @@ package com.pawpaw.framework.web.convertor;
 
 import com.pawpaw.framework.core.codec.RemoteResult;
 import com.pawpaw.framework.core.codec.ResultEncoder;
-import com.pawpaw.framework.core.common.util.PawpawFrameworkUtil;
 import com.pawpaw.framework.core.factory.json.PawpawObjectMapper;
 import com.pawpaw.framework.web.interceptor.ThreadHandlerMapInterceptor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageNotWritableException;
@@ -46,7 +46,7 @@ public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConv
                 return false;
             }
             String cName = controller.getClass().getName();
-            if (PawpawFrameworkUtil.isPawpawPackageClass(cName)) {
+            if (isPawpawPackageClass(cName)) {
                 return true;
             }
         }
@@ -60,4 +60,12 @@ public class PawpawGlobalMessageConverter extends MappingJackson2HttpMessageConv
         RemoteResult<? extends Object> encoded = this.resultEncoder.encode(object);
         super.writeInternal(encoded, type, outputMessage);
     }
+
+
+    private boolean isPawpawPackageClass(String className) {
+        return StringUtils.startsWith(className, "com.pawpaw");
+    }
+
+
+
 }

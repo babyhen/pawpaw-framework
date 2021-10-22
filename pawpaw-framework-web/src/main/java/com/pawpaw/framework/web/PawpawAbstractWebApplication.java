@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class PawpawWebApplication extends PawpawAbstractApplication {
+public abstract class PawpawAbstractWebApplication extends  PawpawAbstractApplication {
 
 
     @Override

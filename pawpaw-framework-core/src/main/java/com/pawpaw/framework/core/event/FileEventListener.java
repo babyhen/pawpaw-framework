@@ -42,11 +42,14 @@ public class FileEventListener implements IEventListener {
         String date = DateTimeUtil.format10(new Date());
         String fileName = date + ".txt";
         File fullPath = new File(this.fileDir, fileName);
+        FileOutputStream fos=null;
         try {
-            FileOutputStream fos = new FileOutputStream(fullPath, true);
+            fos = new FileOutputStream(fullPath, true);
             IOUtils.write(sb.toString(), fos, "utf-8");
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            IOUtils.closeQuietly(fos);
         }
 
 
