@@ -4,7 +4,6 @@ import com.pawpaw.common.util.DateTimeUtil;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -19,8 +18,25 @@ public class FileEventListener implements IEventListener {
             throw new RuntimeException(fileDir + "不是一个有效目录");
         }
         this.fileDir = file;
+        String fileName = this.getFileName();
+        File fullPath = new File(this.fileDir, fileName);
+        if (!fullPath.exists()) {
+            try {
+                fullPath.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
     }
 
+
+    private String getFileName() {
+        String date = DateTimeUtil.format10(new Date());
+        String fileName = date + ".txt";
+        return fileName;
+    }
 
     @Override
     public boolean canHandle(IEvent event) {
@@ -39,16 +55,15 @@ public class FileEventListener implements IEventListener {
         sb.append("--->");
         sb.append(desc);
         sb.append("\r\n");
-        String date = DateTimeUtil.format10(new Date());
-        String fileName = date + ".txt";
+        String fileName = this.getFileName();
         File fullPath = new File(this.fileDir, fileName);
-        FileOutputStream fos=null;
+        FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(fullPath, true);
             IOUtils.write(sb.toString(), fos, "utf-8");
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             IOUtils.closeQuietly(fos);
         }
 
