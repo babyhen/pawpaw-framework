@@ -6,17 +6,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * @see ExceptionListener
  */
-public class ExceptionHandler {
+public class ExceptionBroadcaster {
     private List<ExceptionListener> listeners;
 
-    public static ExceptionHandler defaultHandler() {
-        ExceptionHandler handler = new ExceptionHandler();
+    public static ExceptionBroadcaster of() {
+        ExceptionBroadcaster handler = new ExceptionBroadcaster();
         handler.regist(new ConsolePrintExceptionListener());
         return handler;
     }
 
 
-    public ExceptionHandler() {
+    public ExceptionBroadcaster() {
         this.listeners = new CopyOnWriteArrayList<>();
     }
 
