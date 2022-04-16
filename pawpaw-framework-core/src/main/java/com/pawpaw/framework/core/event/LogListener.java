@@ -8,11 +8,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-public class FileEventListener implements IEventListener {
+public class LogListener implements IEventListener {
 
     private final File fileDir;
 
-    public FileEventListener(String fileDir) {
+    public LogListener(String fileDir) {
         File file = new File(fileDir);
         if (!file.isDirectory()) {
             throw new RuntimeException(fileDir + "不是一个有效目录");
