@@ -37,6 +37,7 @@ class PawpawDefaultMessageHandlerExceptionResolver implements HandlerExceptionRe
             RemoteResult<? extends Object> br = this.resultEncoder.encode(ex);
             byte[] data = this.objectMapper.writeValueAsBytes(br);
             if (data != null) {
+                response.setContentType("application/json;charset=UTF-8");
                 OutputStream out = response.getOutputStream();
                 out.write(data);
                 out.flush();
